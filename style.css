@@ -1,0 +1,22 @@
+hr{
+	height:2px;
+	color: black;
+	background-color: black;
+}
+b{
+	color: teal;
+}
+.node{
+	color: teal;
+	font-weight: bold;
+}
+.json{
+	width: 80%;
+	overflow: auto;
+}
+.json, .formula{
+	border: 1px solid grey;
+}
+.formula{
+display:inline-block;
+}	

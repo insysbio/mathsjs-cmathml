@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Work with math.js</title>
+<link rel="stylesheet" href="style.css"/>
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.10.1/math.min.js"></script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+<script src="math_examples.js"></script>
+<script src="json_print.js"></script>
+<script src="func.js"></script>
+</head>
+<body>
+<div id="navigate">
+	<h2>Navigate</h2>
+</div>
+<br/>
+
+<button onclick='compact(-1)'>Compact</button><button onclick='full(-1)'>Full</button>
+<script type="text/javascript">
+for(var i = 0;i<examples.length;i++){ //Generate div with information about formula
+	document.write("<div id='data"+i+"'>");
+		document.write("<h2>Example #"+i+"</h2>");
+		document.write("<h3>input <b>"+examples[i]+"</b></h3>");
+		document.write("<button onclick='compact("+i+")'>Compact</button><button onclick='full("+i+")'>Full</button></br>");
+		document.write("<div id='json"+i+"' class='json'></div>");//Place for JSON
+		document.write("<button onclick='compact("+i+")'>Compact</button><button onclick='full("+i+")'>Full</button></br>");
+		document.write("<br/>");
+		document.write("<div id='formula"+i+"' class='formula'></div><br/>");//Place for formula
+		document.write("<a href='#navigate'>Up</a></br>");
+		document.write("<hr/>");
+	document.write("</div>");	
+	node = math.parse(examples[i]);
+	var formula = node.toTex();
+	formula = formula.replace(new RegExp("_",'g'),"\\_");
+	document.getElementById('formula'+i).innerHTML = '$$'+formula+'$$';
+	cont = 	JSON.stringify(node,null,2);
+	cont = print_json(cont); //get json with space and br
+	document.getElementById('json'+i).innerHTML += cont+'<br/>';	
+	document.getElementById('navigate').innerHTML += '<a href="#data'+i+'">Example #'+i+'</a><br/>';
+	}
+	
+</script>
+</body>
+</html>
