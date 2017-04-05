@@ -10,13 +10,16 @@ b{
 	color: teal;
 	font-weight: bold;
 }
-.json{
+.json,textarea{
 	width: 80%;
 	overflow: auto;
 }
-.json, .formula{
+.json, table{
 	border: 1px solid grey;
 }
 .formula{
 display:inline-block;
+}
+textarea{
+height:200px;
 }	
