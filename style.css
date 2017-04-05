@@ -14,11 +14,8 @@ b{
 	width: 80%;
 	overflow: auto;
 }
-.json, table{
+.json{
 	border: 1px solid grey;
-}
-.formula{
-display:inline-block;
 }
 textarea{
 height:200px;

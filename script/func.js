@@ -4,7 +4,6 @@ function compact(n)
 		document.getElementsByClassName('json')[n].style.height = '300px';
 	else	
 		$('.json').css('height', '300px');
-	//document.getElementsByClassName('json').style.overflow 
 }
 function full(n){
 	if(n>=0)
