@@ -9,7 +9,7 @@ var examples = [
   "V___5___*2.000-V___7___",
   "SDH*((kf_SDH/(1+Sal/Ki_Sal_SDH))*Suc_SDH*Q_SDH-kr_SDH*Fum_SDH*QH2_SDH)/(1+Suc_SDH+Q_SDH*Km_i_Suc_SDH/Kd_es_Suc_SDH+Suc_SDH*Q_SDH+Fum_SDH+Km_Fum_SDH*QH2_SDH/Kd_ef_Fum_SDH+Fum_SDH*QH2_SDH)",
   "1/v_mix",
-  "V1*k2*(A1-A2)",
+  "V_1*k2*(A1-A2)",
   "t/60",
   "k*(S-X1)/(1+X6^n/Ki^n)",
   "23*s_4*exp(d*12)",
