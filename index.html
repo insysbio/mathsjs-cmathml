@@ -4,16 +4,10 @@
 <title>Work with math.js</title>
 <link rel="stylesheet" href="style.css"/>
 <script type="text/javascript" async src="https://code.jquery.com/jquery-1.8.3.js"></script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  MathML: {
-    extensions: ["content-mathml.js"]
-  }
-});
-</script>
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
 <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script>
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML"></script>
+ <!--<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML"></script>-->
+
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="script/outer/math.min.js"></script>
 <script src="script/math_examples.js"></script>
 <script src="script/json_print.js"></script>
@@ -28,6 +22,7 @@ MathJax.Hub.Config({
 
 <button onclick='compact(-1)'>Compact</button><button onclick='full(-1)'>Full</button>
 <script type="text/javascript">
+//sXML = [];
 for(var i = 0;i<examples.length;i++){ //Generate div with information about formula
 	document.write("<div id='data"+i+"'>");
 		document.write("<h2>Example #"+i+"</h2>");
@@ -64,13 +59,12 @@ for(var i = 0;i<examples.length;i++){ //Generate div with information about form
 	document.getElementById('json'+i).innerHTML += cont+'<br/>';	
 	document.getElementById('navigate').innerHTML += '<a href="#data'+i+'">Example #'+i+'</a><br/>';
 	var oSerializer = new XMLSerializer();
-	var sXML = oSerializer.serializeToString(docmath);
+	sXML = oSerializer.serializeToString(docmath);
 	document.getElementById('textarea'+i).innerHTML = sXML.replace(new RegExp("><","g"),'>\n<');
 	document.getElementById('cformula'+i).innerHTML = sXML;
+	
 	}
-//output cMathML formula(in separate block, because conflict set of config in mathjax)
+</script>	
 
-//for(var i = 0;i<examples.length;i++){}	
-</script>
 </body>
 </html>
