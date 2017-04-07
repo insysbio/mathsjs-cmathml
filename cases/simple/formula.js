@@ -10,5 +10,6 @@ var simple_test_formula =[
     "sin(cos(pow(2,3)))",
     "min2(12,2)",
     "exp(2,3)",
-    "2^3"
+    "2^3",
+    "-a+b+c"
 ];

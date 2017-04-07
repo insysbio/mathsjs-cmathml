@@ -3,15 +3,16 @@
 <head>
 <title>Work with math.js</title>
 <link rel="stylesheet" href="style.css"/>
+
 <script type="text/javascript" async src="https://code.jquery.com/jquery-1.8.3.js"></script>
+
 <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script>
 <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script src="script/outer/math.min.js"></script>
-<script src="script/math_examples.js"></script>
-<script src="script/json_print.js"></script>
-<script src="script/func.js"></script>
-<script src="script/mathsjs2cMathML.js"></script>
-<script src="script/parseAsciiMath.js"></script>
+<script src="lib/mahtjs/math.min.js"></script>
+
+<script src="cases/other/formula.js"></script>
+
+<script src="src/mathsjs2cMathML.js"></script>
 </head>
 <body>
 
@@ -23,11 +24,11 @@
 
 <script type="text/javascript">
 var node, cont;
-for(var i = 0;i<examples.length;i++){ 
+for (var i = 0; i < test_formula.length; i++) { 
 	/*Generate <div> with information about formula*/
 	document.write("<div id='data"+i+"'>");
 		document.write("<h2>Example #"+i+"</h2>");
-		document.write("<h3>input <b>"+examples[i]+"</b></h3>");
+		document.write("<h3>input <b>"+test_formula[i]+"</b></h3>");
 		document.write("<button onclick='compact("+i+")'>Compact</button><button onclick='full("+i+")'>Full</button></br>");
 		document.write("<div id='json"+i+"' class='json'></div>");//Place for JSON
 		document.write("<button onclick='compact("+i+")'>Compact</button><button onclick='full("+i+")'>Full</button></br>");
@@ -48,26 +49,58 @@ for(var i = 0;i<examples.length;i++){
 		document.write("<a href='#navigate'>Up</a></br>");
 		document.write("<hr/>");
 	document.write("</div>");
-	
-    var mathML = parseAsciiMath(examples[i]);
-    
-	/*for output formaula(from parse math.js)*/
-    var formula = node.toTex();	
+
+    var exp_tree_mathjs = math.parse(test_formula[i]);
+
+    var mathML = new MathXMLDom();
+    var cMathML = mathML.createXMLDom(exp_tree_mathjs);
+   
+    var formula = exp_tree_mathjs.toTex();	
 	formula = formula.replace(new RegExp("_",'g'),"\\_");//Screening '_'
     
-    /*for output cMathML-code*/
-    cont = print_json(cont); //Get JSON with &nbsp; and <br/> for output
-	var oSerializer = new XMLSerializer();
-	sXML = oSerializer.serializeToString(mathML);
+    /*for output JSON mathjs expression tree*/
+    var JSON_mathjs = JSON.stringify(exp_tree_mathjs, null, 2);
+    JSON_mathjs = stripJSON(JSON_mathjs); //Get JSON with &nbsp; and <br/> for output
     
-	/* Fill in <div>*/
+    /*for output cMathML-code*/
+	var oSerializer = new XMLSerializer();
+	sXML = oSerializer.serializeToString(cMathML);
+    
+	/* Fill <div>*/
 	document.getElementById('formula'+i).innerHTML = '$$'+formula+'$$';
-	document.getElementById('json'+i).innerHTML += cont+'<br/>';	
+	document.getElementById('json'+i).innerHTML += JSON_mathjs+'<br/>';	
 	document.getElementById('navigate').innerHTML += '<a href="#data'+i+'">Example #'+i+'</a><br/>';
 	document.getElementById('textarea'+i).innerHTML = sXML.replace(new RegExp("><","g"),'>\n<');
 	document.getElementById('cformula'+i).innerHTML = sXML;
+}
+
+/*Subscribe functions*/    
+function stripJSON(cont) {
+    "use strict";
+	cont = cont.replace(new RegExp("\n","g"), "<br/>");
+	cont = cont.replace(new RegExp(" ","g"), "&nbsp;");
+	return cont;
+}    
+    
+function compact(n) {
+    "use strict";
+    if (n >= 0) {
+        (document.getElementsByClassName("json")[n]).style.height = "300px";
+    }	
+    else {	
+        $(".json").css("height", "300px");
+    }
+}
 	
+function full(n) {
+    "use strict";
+	if (n >= 0) {
+		(document.getElementsByClassName("json")[n]).style.height = "auto";
+	}	
+	else {	
+		$(".json").css("height", "auto");
 	}
+}	
 </script>	
 
 </body>

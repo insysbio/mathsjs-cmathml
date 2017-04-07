@@ -18,5 +18,6 @@ var test_formula = [
   "koff*min3(1,fun1,fun2)",
   "k0*sin(t)",
   "sqrt(e,r)",
-  "abs(-ppp)"
+  "abs(-ppp)",
+  "-a+b+c"
 ];

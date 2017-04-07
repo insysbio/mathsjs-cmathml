@@ -3,29 +3,28 @@
 
 <head>
     <title>Test page</title>
-  <!-- ïîäêëþ÷àåì ñòèëè Mocha, äëÿ îòîáðàæåíèÿ ðåçóëüòàòîâ -->
+  <!-- Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ ÑÑ‚Ð¸Ð»Ð¸ Mocha, Ð´Ð»Ñ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð² -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
-  <!-- ïîäêëþ÷àåì áèáëèîòåêó Mocha -->
+  <!-- Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÑƒ Mocha -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
-  <!-- íàñòðàèâàåì Mocha: ïðåäñòîèò BDD-òåñòèðîâàíèå -->
+  <!-- Ð½Ð°ÑÑ‚Ñ€Ð°Ð¸Ð²Ð°ÐµÐ¼ Mocha: Ð¿Ñ€ÐµÐ´ÑÑ‚Ð¾Ð¸Ñ‚ BDD-Ñ‚ÐµÑÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ -->
   <script>
     mocha.setup('bdd');
   </script>
-  <!-- ïîäêëþ÷àåì chai -->
+  <!-- Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ chai -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
-  <!-- â chai åñòü ìíîãî âñåãî, âûíîñèì assert â ãëîáàëüíóþ îáëàñòü -->
+  <!-- Ð² chai ÐµÑÑ‚ÑŒ Ð¼Ð½Ð¾Ð³Ð¾ Ð²ÑÐµÐ³Ð¾, Ð²Ñ‹Ð½Ð¾ÑÐ¸Ð¼ assert Ð² Ð³Ð»Ð¾Ð±Ð°Ð»ÑŒÐ½ÑƒÑŽ Ð¾Ð±Ð»Ð°ÑÑ‚ÑŒ -->
   <script>
     var assert = chai.assert;
   </script>
   <!-- include test function: parseAsciiMath.js,mathsjs2cMathML.js -->
-  <script src="../script/outer/math.min.js"></script>
-   <script src="../script/parseAsciiMath.js"></script>
-  <script src="../script/mathsjs2cMathML.js"></script>  
-  <!-- â ýòîì ñêðèïòå íàõîäÿòñÿ ñïåêè è ìàòåðèàë äëÿ òåñòà-->
-  <script src="test_matherial/test_formula.js"></script>
-  <script src="test_matherial/expected_result.js"></script> 
-  <script src="test_matherial/simple_test.js"></script>
-  <script src="test_matherial/expected_simple.js"></script>   
+  <script src="../lib/mahtjs/math.min.js"></script>
+  <script src="../src/mathsjs2cMathML.js"></script>  
+  <!-- Ð² ÑÑ‚Ð¾Ð¼ ÑÐºÑ€Ð¸Ð¿Ñ‚Ðµ Ð½Ð°Ñ…Ð¾Ð´ÑÑ‚ÑÑ ÑÐ¿ÐµÐºÐ¸ Ð¸ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð» Ð´Ð»Ñ Ñ‚ÐµÑÑ‚Ð°-->
+  <script src="../cases/simple/formula.js"></script>
+  <script src="../cases/other/formula.js"></script>
+  <script src="../cases/simple/expected.js"></script>
+  <script src="../cases/other/expected.js"></script>
   <script src="test.js"></script>
   <style>
     textarea{
@@ -37,35 +36,16 @@
 </head>
 
 <body>
-<!-- â ýëåìåíòå ñ id="mocha" áóäóò ðåçóëüòàòû òåñòîâ -->
+<!-- Ð² ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ðµ Ñ id="mocha" Ð±ÑƒÐ´ÑƒÑ‚ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ñ‚ÐµÑÑ‚Ð¾Ð² -->
 <div id="mocha"></div>
 
-<div id="view1"></div>
-<hr/>
-<div id="view2"></div>
-<!-- çàïóñòèòü òåñòû! -->
+<!-- Ð·Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ñ‚ÐµÑÑ‚Ñ‹! -->
 <script>
 mocha.run();
 
-var oSerializer = new XMLSerializer();
-for(var i = 2; i < test_formula.length; i++) {
-    var xml = oSerializer.serializeToString( parseAsciiMath(test_formula[i]) );
-    if (xml != expected[i]) {
-    document.getElementById("view1").innerHTML += "<div id='output"+i+"'><h3>formula "+i+" "+test_formula[i]+"</h3><textarea>Generate\n"+xml.replace(new RegExp("><","g"),'>\n<')+"</textarea><textarea>DBSolve\n"+expected[i].replace(new RegExp("><","g"),'>\n<')+"</textarea></div>";
-    }
-}
 </script>
 
-<script>
-for(var i = 0; i < expected_simple.length; i++) {
-    var xml = oSerializer.serializeToString( parseAsciiMath(simple_test_formula[i]) );
-    if (xml != expected_simple[i]) {
-    document.getElementById("view2").innerHTML += "<div id='output"+i+"'><h3>formula "+i+" "+simple_test_formula[i]+"</h3><textarea>Generate\n"+xml.replace(new RegExp("><","g"),'>\n<')+"</textarea><textarea>DBSolve\n"+expected_simple[i].replace(new RegExp("><","g"),'>\n<')+"</textarea></div>";
-    }
-}
 
-
-</script>
 
 </body>
 </html>
