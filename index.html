@@ -11,6 +11,7 @@
 <script src="script/json_print.js"></script>
 <script src="script/func.js"></script>
 <script src="script/mathsjs2cMathML.js"></script>
+<script src="script/parseAsciiMath.js"></script>
 </head>
 <body>
 
@@ -21,6 +22,7 @@
 <button onclick='compact(-1)'>Compact</button><button onclick='full(-1)'>Full</button>
 
 <script type="text/javascript">
+var node, cont;
 for(var i = 0;i<examples.length;i++){ 
 	/*Generate <div> with information about formula*/
 	document.write("<div id='data"+i+"'>");
@@ -47,20 +49,17 @@ for(var i = 0;i<examples.length;i++){
 		document.write("<hr/>");
 	document.write("</div>");
 	
-	/*Parse formula and get JSON and cMathML*/
-	node = math.parse(examples[i]);//Get formula from example's array and parse it
-	
-	var formula = node.toTex();	
+    var mathML = parseAsciiMath(examples[i]);
+    
+	/*for output formaula(from parse math.js)*/
+    var formula = node.toTex();	
 	formula = formula.replace(new RegExp("_",'g'),"\\_");//Screening '_'
-	
-	cont = 	JSON.stringify(node,null,2);
-	var docmath = create_obj(cont);//Important in this place. Before add &nbsp; and <br/>
-	cont = print_json(cont); //Get JSON with &nbsp; and <br/> for output
-
-	/*for output cMathML-code*/
+    
+    /*for output cMathML-code*/
+    cont = print_json(cont); //Get JSON with &nbsp; and <br/> for output
 	var oSerializer = new XMLSerializer();
-	sXML = oSerializer.serializeToString(docmath);
-	
+	sXML = oSerializer.serializeToString(mathML);
+    
 	/* Fill in <div>*/
 	document.getElementById('formula'+i).innerHTML = '$$'+formula+'$$';
 	document.getElementById('json'+i).innerHTML += cont+'<br/>';	

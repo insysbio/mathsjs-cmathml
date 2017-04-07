@@ -24,16 +24,20 @@ function traverse_tree(moth, node) {
         var tag_op;
         if (typeof node.fn === "object") {
             tag_op = node.fn.name;
+            switch (tag_op) {
+                case "pow": tag_op = "power"; break;
+                case "exp": tag_op = "power"; break;
+            }
         }
         else {
             switch (node.fn) {//if need add new oparetor, then see doc: http://mathjs.org/docs/expressions/syntax.html
-            case "add": tag_op = "plus"; break;
-            case "subtract": tag_op = "minus"; break;
-            case "multiply": tag_op = "times"; break;
-            case "pow": tag_op = "power"; break;
-            case "divide": tag_op = "divide"; break;
-            case "unaryPlus": tag_op = "plus"; break;
-            case "unaryMinus": tag_op = "minus"; break;
+                case "add": tag_op = "plus"; break;
+                case "subtract": tag_op = "minus"; break;
+                case "multiply": tag_op = "times"; break;
+                case "pow": tag_op = "power"; break;
+                case "divide": tag_op = "divide"; break;
+                case "unaryPlus": tag_op = "plus"; break;
+                case "unaryMinus": tag_op = "minus"; break;
             }
         }
     var op = doc.createElement(tag_op);
