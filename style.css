@@ -10,8 +10,9 @@ b{
 	color: teal;
 	font-weight: bold;
 }
-.json,textarea{
-	width: 80%;
+.json, textarea{
+	width: 100%;
+  padding: 10px;
 	overflow: auto;
 }
 .json{
@@ -20,3 +21,8 @@ b{
 textarea{
 height:200px;
 }	
+
+p {
+  background: #ccc;
+  padding: 10px;
+}
