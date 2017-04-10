@@ -1,5 +1,11 @@
-var doc = document.implementation.createDocument(null, ""); //create new DOM for our XML
-var dict_replace_func = {
+"use strict";
+/**
+*  mathjs2cMathML.js
+*  https://github.com/insysbio/math_json
+*  (c) 2017 ISB
+*  Add to math.js method toCMathML, which convert exression tree of mathjs to cMathML exression tree
+**/
+var dictReplaceFunc = {
     "add": "plus",
     "subtract": "minus",
     "multiply": "times",
@@ -35,70 +41,65 @@ var dict_replace_func = {
     "min2": "min2",
     "min3": "min3",
     "max2": "max2",
-    "max3": "max3",    
-} 
+    "max3": "max3"}; 
 
+/**Create <math></math> and generate expression tree from mathjs expression tree. Return XML-Dom
+*@param {string} input_json Json-code, which is passed to the function
+*/
+math.toCMathML = function (mathObject) {
+    
+    if (mathObject.toString().match(/[^\^*\/+-\w()_,. ]/) == null) {
+        var doc = document.implementation.createDocument("http://www.w3.org/1998/Math/MathML", "math");
 
-function MathXMLDom() {
-    
-    /**Create <math></math> and generate expression tree from mathjs expression tree. Return XML-Dom
-    @param {string} input_json Json-code, which is passed to the function**/
-    this.createXMLDom = function (expression_tree_mathjs) {
-        "use strict";
-        var docmath = doc.createElement("math");	
-        docmath.setAttribute("xmlns", "http://www.w3.org/1998/Math/MathML");
-        this.traverseNode(docmath, expression_tree_mathjs);
-        return docmath;
-    }    
-    
+        traverseNode(doc.firstElementChild, mathObject);
+        
+        return doc.firstElementChild;
+    }
+    else {
+        return null;    
+    }
     /**Create node of expression tree, based on what was received at the entrance from node of JSON
-    fn->function(sin,cos,min2,etc(see in name)) or operator(+,-,etc);
-    name->variable;
-    value->number;
-    content->() and we parse expression inside brackets
-    @param {object} moth Block of tags inside of which we located 
-    @param {object} node Node of mathjs-tree, which we watch**/
-    this.traverseNode = function (moth, node) {
-        "use strict";
+    *fn->function(sin,cos,min2,etc(see in name)) or operator(+,-,etc);
+    *name->variable;
+    *value->number;
+    *content->() and we parse expression inside brackets
+    *@param {object} moth Block of tags inside of which we located 
+    *@param {object} node Node of mathjs-tree, which we watch
+    */
+    function traverseNode(moth, node) {
         if (node.hasOwnProperty("fn")) {
-            var operation_name;
+            var operationName;
             
-            var child_apply = doc.createElement("apply");
-            moth.appendChild(child_apply);
+            var childApply = doc.createElement("apply");
+            moth.appendChild(childApply);
             
             if (typeof node.fn === "object") {
-                if (node.fn.name in dict_replace_func) {
-                    operation_name = dict_replace_func[node.fn.name];
+                if (node.fn.name in dictReplaceFunc) {
+                    operationName = dictReplaceFunc[node.fn.name];
                 }
                 else {
-                    operation_name = node.fn.name;
+                    operationName = node.fn.name;
                 }
             }
             else {
-                if (node.fn in dict_replace_func) {
-                    operation_name = dict_replace_func[node.fn];
+                if (node.fn in dictReplaceFunc) {
+                    operationName = dictReplaceFunc[node.fn];
                 }
                 else {
-                    operation_name = node.fn;
+                    operationName = node.fn;
                 }            
             }
-            
-            var op = doc.createElement(operation_name);
-            child_apply.appendChild(op);
+                     
+            childApply.appendChild(doc.createElement(operationName));
         
-        /* Есть ли способ сделать, чтобы эта конструкция здесь работала?
-        node.args.forEach( function (item) {
-            ???.traverseNode(child_apply, item);
-            });
-        }
-        */
         
-        for (var i = 0; i < node.args.length; i++) {
-            this.traverseNode(child_apply, node.args[i]);
-            }
+            node.args.forEach(function (item) {
+                traverseNode(childApply, item);
+                });
         }
         
-        if ((node.hasOwnProperty("name")) && !(node.hasOwnProperty("fn"))) {
+        
+        if (node.hasOwnProperty("name") && !(node.hasOwnProperty("fn"))) {
             var ci = doc.createElement("ci");
             ci.innerHTML = node.name;
             moth.appendChild(ci);
@@ -112,7 +113,8 @@ function MathXMLDom() {
         }	
         
         if (node.hasOwnProperty("content")) {
-            this.traverseNode(moth, node.content);
+            traverseNode(moth, node.content);
         }
     }
-}  
+ 
+}
