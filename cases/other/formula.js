@@ -17,7 +17,7 @@ var test_formula = [
   "45*min2(eee*33, k_1)",
   "koff*min3(1,fun1,fun2)",
   "k0*sin(t)",
-  "sqrt(e,r)",
+  "sqrt(e)",
   "abs(-ppp)",
   "-a+b+c"
 ];

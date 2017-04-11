@@ -58,6 +58,7 @@ math.toCMathML = function (mathObject) {
     else {
         return null;    
     }
+    
     /**Create node of expression tree, based on what was received at the entrance from node of JSON
     *fn->function(sin,cos,min2,etc(see in name)) or operator(+,-,etc);
     *name->variable;
@@ -74,7 +75,7 @@ math.toCMathML = function (mathObject) {
             moth.appendChild(childApply);
             
             if (typeof node.fn === "object") {
-                if (node.fn.name in dictReplaceFunc) {
+                if (!(dictReplaceFunc[node.fn.name])) {
                     operationName = dictReplaceFunc[node.fn.name];
                 }
                 else {
@@ -82,7 +83,7 @@ math.toCMathML = function (mathObject) {
                 }
             }
             else {
-                if (node.fn in dictReplaceFunc) {
+                if (!(dictReplaceFunc[node.fn])) {
                     operationName = dictReplaceFunc[node.fn];
                 }
                 else {
