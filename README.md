@@ -2,6 +2,8 @@
 
 ## Description
 
+Simple function in JavaScript.
+
 Extends mathjs http://mathjs.org/ library by function translating the internal object to content MathML https://www.w3.org/Math/
 
 ## Maintainers
