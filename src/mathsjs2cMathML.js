@@ -55,9 +55,27 @@ math.toCMathML = function (mathObject) {
     
     if (mathObject.toString().match(/[^\^*\/+-\w()_,.\>\<\= ]/) == null) {
         var doc = document.implementation.createDocument("http://www.w3.org/1998/Math/MathML", "math");
+        if (mathObject.hasOwnProperty("expr")) {
+          var lambda = doc.createElement("lambda");
+          
+          
+          mathObject.params.forEach(function(item) {
+            var bvar = doc.createElement("bvar");
+            var param = doc.createElement("ci");
+            param.innerHTML = item;
+            bvar.appendChild(param);
+            lambda.appendChild(bvar);
+          });
+          
 
-        traverseNode(doc.firstElementChild, mathObject);
-        
+          var exprApply = doc.createElement("apply");
+          traverseNode(lambda, mathObject.expr);
+          //lambda.appendChild(exprApply)
+          doc.firstElementChild.appendChild(lambda);
+        }
+        else {
+          traverseNode(doc.firstElementChild, mathObject);
+        }
         return doc.firstElementChild;
     }
     else {

@@ -24,7 +24,7 @@
 var testEXP = "f(x, y, qween) = x+y*6";
 var testIQ = "a > b+c";
 document.getElementById("result").innerHTML = stripJSON(JSON.stringify(math.parse(testIQ), null, 2));
-
+console.log(math.toCMathML(math.parse(testEXP)));
 function stripJSON(cont) {
 	cont = cont.replace(/\n/g, "<br/>");
 	cont = cont.replace(/ /g, "&nbsp;");
