@@ -41,14 +41,19 @@ var dictReplaceFunc = {
     "min2": "min2",
     "min3": "min3",
     "max2": "max2",
-    "max3": "max3"}; 
+    "max3": "max3",
+    "larger": "gt",
+    "largerEq": "geq",
+    "smallerEq": "leq",
+    "smaller": "lt"}; 
 
 /**Create <math></math> and generate expression tree from mathjs expression tree. Return XML-Dom
 *@param {string} input_json Json-code, which is passed to the function
 */
 math.toCMathML = function (mathObject) {
+    console.log("try", mathObject);
     
-    if (mathObject.toString().match(/[^\^*\/+-\w()_,. ]/) == null) {
+    if (mathObject.toString().match(/[^\^*\/+-\w()_,.\>\<\= ]/) == null) {
         var doc = document.implementation.createDocument("http://www.w3.org/1998/Math/MathML", "math");
 
         traverseNode(doc.firstElementChild, mathObject);
