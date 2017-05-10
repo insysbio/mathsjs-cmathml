@@ -72,12 +72,12 @@ math.toCMathML = function (mathObject) {
           var exprApply = doc.createElement("apply");
           traverseNode(lambda, mathObject.expr);
           //lambda.appendChild(exprApply)
-          doc.firstElementChild.appendChild(lambda);
+          doc.documentElement.appendChild(lambda);
         }
         else {
-          traverseNode(doc.firstElementChild, mathObject);
+          traverseNode(doc.documentElement, mathObject);
         }
-        return doc.firstElementChild;
+        return doc.documentElement;
     }
     else {
         return null;    
