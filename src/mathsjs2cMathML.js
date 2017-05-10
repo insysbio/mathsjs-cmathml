@@ -36,8 +36,8 @@ var dictReplaceFunc = {
     "ceiling": "ceiling",
     "ceil": "ceiling",
     "power": "power",
-    "^": "power",
     "pow": "power",
+    "^": "power",
     "min2": "min2",
     "min3": "min3",
     "max2": "max2",
@@ -73,9 +73,8 @@ math.toCMathML = function (mathObject) {
             
             var childApply = doc.createElement("apply");
             moth.appendChild(childApply);
-            
             if (typeof node.fn === "object") {
-                if (!(dictReplaceFunc[node.fn.name])) {
+                if (dictReplaceFunc[node.fn.name]) {
                     operationName = dictReplaceFunc[node.fn.name];
                 }
                 else {
@@ -83,7 +82,7 @@ math.toCMathML = function (mathObject) {
                 }
             }
             else {
-                if (!(dictReplaceFunc[node.fn])) {
+                if (dictReplaceFunc[node.fn]) {                    
                     operationName = dictReplaceFunc[node.fn];
                 }
                 else {
