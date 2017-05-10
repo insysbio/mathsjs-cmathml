@@ -45,14 +45,15 @@ var dictReplaceFunc = {
     "larger": "gt",
     "largerEq": "geq",
     "smallerEq": "leq",
-    "smaller": "lt"}; 
+    "smaller": "lt",
+    "equal" : "eq",
+    "unequal" : "neq"
+    }; 
 
 /**Create <math></math> and generate expression tree from mathjs expression tree. Return XML-Dom
 *@param {string} input_json Json-code, which is passed to the function
 */
-math.toCMathML = function (mathObject) {
-    console.log("try", mathObject);
-    
+math.toCMathML = function (mathObject) {    
     if (mathObject.toString().match(/[^\^*\/+-\w()_,.\>\<\= ]/) == null) {
         var doc = document.implementation.createDocument("http://www.w3.org/1998/Math/MathML", "math");
         if (mathObject.hasOwnProperty("expr")) {
@@ -62,7 +63,7 @@ math.toCMathML = function (mathObject) {
           mathObject.params.forEach(function(item) {
             var bvar = doc.createElement("bvar");
             var param = doc.createElement("ci");
-            param.innerHTML = item;
+            param.appendChild(doc.createTextNode(item)); //var text = document.createTextNode(data);
             bvar.appendChild(param);
             lambda.appendChild(bvar);
           });
@@ -124,13 +125,13 @@ math.toCMathML = function (mathObject) {
         
         if (node.hasOwnProperty("name") && !(node.hasOwnProperty("fn"))) {
             var ci = doc.createElement("ci");
-            ci.innerHTML = node.name;
+            ci.appendChild(doc.createTextNode(node.name));
             moth.appendChild(ci);
         }
         
         if (node.hasOwnProperty("value")) {
             var cn = doc.createElement("cn");
-            cn.innerHTML = node.value;
+            cn.appendChild(doc.createTextNode(node.value));
             cn.setAttribute("type", "double");
             moth.appendChild(cn);
         }	
