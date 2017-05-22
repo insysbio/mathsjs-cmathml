@@ -8,7 +8,7 @@ Extends mathjs http://mathjs.org/ library by function translating the internal o
 
 ## Maintainers
 
- - Viktoria Tkachenko @vetedde
+ - Viktoria Tkachenko @tkachVika
  - Evgeny Metelkin @metelkin
  
 ## Copyright
