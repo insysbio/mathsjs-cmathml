@@ -54,7 +54,7 @@ var dictReplaceFunc = {
 *@param {string} input_json Json-code, which is passed to the function
 */
 math.toCMathML = function (mathObject) {    
-    if (mathObject.toString().match(/[^\^*\/+-\w()_,.\>\<\= ]/) == null) {
+    if (mathObject.toString().match(/[^\^*\/+-\w()_,.\>\<\=\:\? ]/) == null) {
         var doc = document.implementation.createDocument("http://www.w3.org/1998/Math/MathML", "math");
         if (mathObject.hasOwnProperty("expr")) {
           var lambda = doc.createElement("lambda");
@@ -73,6 +73,21 @@ math.toCMathML = function (mathObject) {
           traverseNode(lambda, mathObject.expr);
           //lambda.appendChild(exprApply)
           doc.documentElement.appendChild(lambda);
+        }
+        else if (mathObject.hasOwnProperty("condition")) {
+          var piecewise = doc.createElement("piecewise");
+          var piece = doc.createElement("piece");
+          var otherwise = doc.createElement("otherwise");
+          
+          traverseNode(piece, mathObject.trueExpr);
+          traverseNode(piece, mathObject.condition);
+          traverseNode(otherwise, mathObject.falseExpr);
+          
+          piecewise.appendChild(piece);
+          piecewise.appendChild(otherwise);
+          
+          doc.documentElement.appendChild(piecewise);
+          
         }
         else {
           traverseNode(doc.documentElement, mathObject);

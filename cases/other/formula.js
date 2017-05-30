@@ -23,7 +23,8 @@ var test_formula = [
   "V___5___ < 2.000-V___7___",
   "f(x, y, z) = x+y+z",
   "E==mc^2",
-  "t==1 or t==2 or t ==3"
+  "t==1 or t==2 or t ==3",
+  "x < 0 ? x + a : 20"
   
   
 ];
