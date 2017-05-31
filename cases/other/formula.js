@@ -25,7 +25,7 @@ var test_formula = [
   "E==mc^2",
   "t==1 or t==2 or t ==3",
   "x < 0 ? x + a : 20",
-  "f(a,b,c,d) == a > b ? c : d",
-  "f(x,y) == x-y > 0 ? x : y",
-  "f(x,y) == x / abs(x)"
+  "f(a,b,c,d) = a > b ? c : d",
+  "f(x,y) = x-y > 0 ? x : y",
+  "f(x,y) = x / abs(x)"
 ];
