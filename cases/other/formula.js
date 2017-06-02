@@ -27,5 +27,6 @@ var test_formula = [
   "x < 0 ? x + a : 20",
   "f(a,b,c,d) = a > b ? c : d",
   "f(x,y) = x-y > 0 ? x : y",
-  "f(x,y) = x / abs(x)"
+  "f(x,y) = x / abs(x)",
+  "f(x,y,z) = (x-y > 0 ? x : y)-z > 0 ? (x-y > 0 ? x : y) : z"
 ];
