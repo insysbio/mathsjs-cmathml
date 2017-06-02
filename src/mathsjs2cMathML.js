@@ -59,7 +59,6 @@ math.toCMathML = function (mathObject) {
         if (mathObject.hasOwnProperty("expr")) {
           var lambda = doc.createElement("lambda");
           
-          
           mathObject.params.forEach(function(item) {
             var bvar = doc.createElement("bvar");
             var param = doc.createElement("ci");
@@ -67,49 +66,20 @@ math.toCMathML = function (mathObject) {
             bvar.appendChild(param);
             lambda.appendChild(bvar);
           });
-          
 
-          definitionTypeExpr(lambda, mathObject.expr);
+          traverseNode(lambda, mathObject.expr);
           
           doc.documentElement.appendChild(lambda);
         }
         else {
-          definitionTypeExpr(doc.documentElement, mathObject);
+          traverseNode(doc.documentElement, mathObject);
         }
         return doc.documentElement;
     }
     else {
         return null;    
     }
-     
-    /**Definition type of function(simple or piecewise) and according it run traverseNode
-    *@param {object} parentNode - node to which elements will be added
-    *@param {object} mathObj - mathjs parse obj
-    * returns {object} DOM of cMathMl expession
-    */   
-    function definitionTypeExpr(parentNode, mathObj) {
-      if (mathObj.hasOwnProperty("condition")) {
-          var piecewise = doc.createElement("piecewise");
-          var piece = doc.createElement("piece");
-          var otherwise = doc.createElement("otherwise");
-          
-          traverseNode(piece, mathObj.trueExpr);
-          traverseNode(piece, mathObj.condition);
-          traverseNode(otherwise, mathObj.falseExpr);
-          
-          piecewise.appendChild(piece);
-          piecewise.appendChild(otherwise);
-          
-          parentNode.appendChild(piecewise);
-          
-        }
-      else {
-          traverseNode(parentNode, mathObj);
-        }
-        
-    return parentNode;    
-    }
-    
+
     /**Create node of expression tree, based on what was received at the entrance from node of JSON
     *fn->function(sin,cos,min2,etc(see in name)) or operator(+,-,etc);
     *name->variable;
@@ -119,6 +89,22 @@ math.toCMathML = function (mathObject) {
     *@param {object} node Node of mathjs-tree, which we watch
     */
     function traverseNode(moth, node) {
+      if (node.hasOwnProperty("condition")) {
+          var piecewise = doc.createElement("piecewise");
+          var piece = doc.createElement("piece");
+          var otherwise = doc.createElement("otherwise");
+          
+          traverseNode(piece, node.trueExpr);
+          traverseNode(piece, node.condition);
+          traverseNode(otherwise, node.falseExpr);
+          
+          piecewise.appendChild(piece);
+          piecewise.appendChild(otherwise);
+          
+          moth.appendChild(piecewise);
+          
+        }        
+        
         if (node.hasOwnProperty("fn")) {
             var operationName;
             
@@ -132,14 +118,13 @@ math.toCMathML = function (mathObject) {
                     operationName = node.fn.name;
                 }
             }
-            else {
-                if (dictReplaceFunc[node.fn]) {                    
+            else  if (dictReplaceFunc[node.fn]) {                    
                     operationName = dictReplaceFunc[node.fn];
                 }
                 else {
                     operationName = node.fn;
                 }            
-            }
+            
                      
             childApply.appendChild(doc.createElement(operationName));
         
