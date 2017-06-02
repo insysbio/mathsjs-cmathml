@@ -69,33 +69,45 @@ math.toCMathML = function (mathObject) {
           });
           
 
-          var exprApply = doc.createElement("apply");
-          traverseNode(lambda, mathObject.expr);
-          //lambda.appendChild(exprApply)
+          definitionTypeExpr(lambda, mathObject.expr);
+          
           doc.documentElement.appendChild(lambda);
         }
-        else if (mathObject.hasOwnProperty("condition")) {
-          var piecewise = doc.createElement("piecewise");
-          var piece = doc.createElement("piece");
-          var otherwise = doc.createElement("otherwise");
-          
-          traverseNode(piece, mathObject.trueExpr);
-          traverseNode(piece, mathObject.condition);
-          traverseNode(otherwise, mathObject.falseExpr);
-          
-          piecewise.appendChild(piece);
-          piecewise.appendChild(otherwise);
-          
-          doc.documentElement.appendChild(piecewise);
-          
-        }
         else {
-          traverseNode(doc.documentElement, mathObject);
+          definitionTypeExpr(doc.documentElement, mathObject);
         }
         return doc.documentElement;
     }
     else {
         return null;    
+    }
+     
+    /**Definition type of function(simple or piecewise) and according it run traverseNode
+    *@param {object} parentNode - node to which elements will be added
+    *@param {object} mathObj - mathjs parse obj
+    * returns {object} DOM of cMathMl expession
+    */   
+    function definitionTypeExpr(parentNode, mathObj) {
+      if (mathObj.hasOwnProperty("condition")) {
+          var piecewise = doc.createElement("piecewise");
+          var piece = doc.createElement("piece");
+          var otherwise = doc.createElement("otherwise");
+          
+          traverseNode(piece, mathObj.trueExpr);
+          traverseNode(piece, mathObj.condition);
+          traverseNode(otherwise, mathObj.falseExpr);
+          
+          piecewise.appendChild(piece);
+          piecewise.appendChild(otherwise);
+          
+          parentNode.appendChild(piecewise);
+          
+        }
+      else {
+          traverseNode(parentNode, mathObj);
+        }
+        
+    return parentNode;    
     }
     
     /**Create node of expression tree, based on what was received at the entrance from node of JSON
