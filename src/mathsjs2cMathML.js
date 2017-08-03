@@ -143,8 +143,18 @@ math.toCMathML = function (mathObject) {
         
         if (node.hasOwnProperty("value")) {
             var cn = doc.createElement("cn");
-            cn.appendChild(doc.createTextNode(node.value));
-            cn.setAttribute("type", "double");
+            if (String(node.value).match(/^[\d]+[.]?[\d]*[e][+-][\d]+$/)) {
+                cn.setAttribute("type", "e-notation");
+                var value = String(node.value).match(/^([\d]+[.]?[\d]*)[e]([+-][\d]+)$/);
+                cn.appendChild(doc.createTextNode(value[1])); 
+                cn.appendChild(doc.createTextNode("</sep>"));
+                cn.appendChild(doc.createTextNode(value[2]));
+            }
+            else {
+                cn.appendChild(doc.createTextNode(node.value));
+            }            
+            
+            //
             moth.appendChild(cn);
         }	
         

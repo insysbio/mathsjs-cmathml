@@ -30,5 +30,9 @@ var test_formula = [
   "f(x,y) = x / abs(x)",
   "f(x,y,z) = (x-y > 0 ? x : y)-z > 0 ? (x-y > 0 ? x : y) : z",
   "f(x, y, z) = x > 0 ? y + z :  y < 1 ? 12 : 8",
-  "f(x, y, z) = y < 1 ? (x < 2 ? 1: 4): 12 " //NOTE: for true expr need brackets, look str. 32&33
+  "f(x, y, z) = y < 1 ? (x < 2 ? 1: 4): 12 ", //NOTE: for true expr need brackets, look str. 32&33
+  "5",
+  "x*5.1",
+  "x*5.1e-3",
+  "x*5e-3",
 ];
