@@ -13,5 +13,5 @@ Extends mathjs http://mathjs.org/ library by function translating the internal o
  
 ## Copyright
  
-Institute for Systems Biology, Moscow, 2017
+InSysBio, Moscow, 2017
 http://insysbio.com
