@@ -1,0 +1,25 @@
+{
+  "name": "math",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon test/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "json5": "^0.5.1",
+    "lodash": "^4.17.4",
+    "mathjs": "^4.0.1",
+    "pretty-json-stringify": "0.0.2",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.17.2"
+  }
+}
