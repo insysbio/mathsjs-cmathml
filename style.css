@@ -1,0 +1,28 @@
+hr{
+	height:2px;
+	color: black;
+	background-color: black;
+}
+b{
+	color: teal;
+}
+.node{
+	color: teal;
+	font-weight: bold;
+}
+.json, textarea{
+	width: 80%;
+  padding: 10px;
+	overflow: auto;
+}
+.json{
+	border: 1px solid grey;
+}
+textarea{
+height:200px;
+}	
+
+p {
+  background: #ccc;
+  padding: 10px;
+}

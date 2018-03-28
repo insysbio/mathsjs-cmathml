@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test page</title>
+  <!-- подключаем стили Mocha, для отображения результатов -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+  <!-- подключаем библиотеку Mocha -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+  <!-- настраиваем Mocha: предстоит BDD-тестирование -->
+  <script>
+    mocha.setup('bdd');
+  </script>
+  <!-- подключаем chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+  <!-- в chai есть много всего, выносим assert в глобальную область -->
+  <script>
+    var assert = chai.assert;
+  </script>
+  <!-- include test function: parseAsciiMath.js,mathsjs2cMathML.js -->
+  <script src="../lib/mahtjs/math.min.js"></script>
+  <script src="../src/mathsjs2cMathML.js"></script>  
+  <!-- в этом скрипте находятся спеки и материал для теста-->
+  <script src="../cases/simple/formula.js"></script>
+  <script src="../cases/other/formula.js"></script>
+  <script src="../cases/simple/expected.js"></script>
+  <script src="../cases/other/expected.js"></script>
+  <script src="test.js"></script>
+  <style>
+    textarea{
+        height: 250px;
+        width: 400px;
+        overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+<!-- в элементе с id="mocha" будут результаты тестов -->
+<div id="mocha"></div>
+
+<!-- запустить тесты! -->
+<script>
+mocha.run();
+
+</script>
+
+
+
+</body>
+</html>
