@@ -201,7 +201,7 @@ test_formula.forEach(function(x, i) {
 
 		var xhr = new XMLHttpRequest();
 		console.log(x);
-		xhr.open("GET","/mathsToCMathML?formula="+x, false);
+		xhr.open("GET","/mathsToCMathML?formula="+x.replace('+', '%2B'), false);
 		xhr.send();
 		if (xhr.status == 200) {
 			let response = JSON.parse(xhr.responseText)

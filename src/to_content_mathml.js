@@ -104,10 +104,8 @@ function _traverse(parentXML, node) {
   }
 
   function _parseParenthesisNode(parentXML, node) {
-
-
       if (node.content.condition) {
-        _traverse(parentXML, node.content) 
+        _traverse(parentXML, node.content)
       }
       else {
         node.content.forEach((item) => {
