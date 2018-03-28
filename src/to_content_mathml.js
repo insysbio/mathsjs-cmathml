@@ -104,16 +104,7 @@ function _traverse(parentXML, node) {
   }
 
   function _parseParenthesisNode(parentXML, node) {
-      if (node.content.condition) {
-        _traverse(parentXML, node.content)
-      }
-      else {
-        node.content.forEach((item) => {
-          let apply = XMLDocument.createElement("apply");
-          _traverse(apply, item);
-          parentXML.appendChild(apply);
-        });
-      }
+        _traverse(parentXML, node.content)      
   }
 
   function _parseOperatorNode(parentXML, node) {
