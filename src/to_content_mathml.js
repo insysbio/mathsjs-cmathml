@@ -150,16 +150,13 @@ function _traverse(parentXML, node) {
     var piece = XMLDocument.createElement("piece");
     var otherwise = XMLDocument.createElement("otherwise");
 
-
     if(node.trueExpr) _traverse(piece, node.trueExpr)
     if(node.falseExpr) _traverse(otherwise, node.falseExpr)
     if(node.condition) _traverse(piece, node.condition)
 
-
     piecewise.appendChild(piece);
     piecewise.appendChild(otherwise);
     parentXML.appendChild(piecewise);
-
   }
 
   function _validate(formula) {

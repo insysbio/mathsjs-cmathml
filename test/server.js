@@ -24,6 +24,7 @@ app.get("/mathsToCMathML", function(request, response){
   response.send(
     {
       'formula': formula,
+      'tex': formula.toTex(),
       'cMathML': formula.toCMathML().toString()
     });
 });

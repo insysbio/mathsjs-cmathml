@@ -197,7 +197,7 @@ test_formula.forEach(function(x, i) {
     content.appendChild(divData);
 
     //var expTreeMathjs = math.parse(x);
-		var cMathML = null, expTreeMathjs = null;
+		var cMathML = null, expTreeMathjs = null, latexFormula = null;
 
 		var xhr = new XMLHttpRequest();
 		console.log(x);
@@ -207,6 +207,7 @@ test_formula.forEach(function(x, i) {
 			let response = JSON.parse(xhr.responseText)
 			cMathML = response.cMathML;
 			expTreeMathjs = response.formula;
+			latexFormula = response.tex;
 		}
 		else {
 			console.log(xhr);
@@ -224,7 +225,7 @@ test_formula.forEach(function(x, i) {
         var sXML = cMathML;
 
         /* Fill <div>*/
-        document.getElementById("formula"+i).innerHTML = "$$"+x+"$$";
+        document.getElementById("formula"+i).innerHTML = "$$"+latexFormula+"$$";
         document.getElementById("json"+i).innerHTML += JSON_mathjs+"<br/>";
         document.getElementById("navigate").innerHTML += `<a href='#data${i}'>Example #${i}: ${x}</a><br/>`;
         document.getElementById("textarea"+i).innerHTML = sXML.replace(/></g,">\n<");
