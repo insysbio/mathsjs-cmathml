@@ -1,5 +1,3 @@
-// import internal
-//const dictionary = require("./dictionary"); // dictionary file
 "use strict";
 
 var DOMParser = require('xmldom').DOMParser;
@@ -104,7 +102,7 @@ function _traverse(parentXML, node) {
   }
 
   function _parseParenthesisNode(parentXML, node) {
-        _traverse(parentXML, node.content)      
+        _traverse(parentXML, node.content)
   }
 
   function _parseOperatorNode(parentXML, node) {

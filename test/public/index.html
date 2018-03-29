@@ -98,13 +98,13 @@ cases.forEach(function(x, i) {
 		        button.setAttribute("onclick", "compact("+i+")");
 		        button.innerHTML = "<i class='fa fa-compress'></i>";
 						button.classList.add("w3-button", "w3-circle", "w3-purple", "w3-small", "w3-margin-bottom")
-		        divData.appendChild(button);
+		        header2.appendChild(button);
 
 		        button = document.createElement("button");
 		        button.setAttribute("onclick", "full("+i+")");
 						button.classList.add("w3-button", "w3-circle", "w3-indigo", "w3-small", "w3-margin-bottom", "w3-margin-left")
 		        button.innerHTML = "<i class='fa fa-expand'></i>";
-		        divData.appendChild(button);
+		        header2.appendChild(button);
 
 
         var header3 = document.createElement("h3");
