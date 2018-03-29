@@ -16,6 +16,11 @@ module.exports = {
         {
           from: './src/index.html',
           to: "index.html"
+        },
+        {
+          context: './lib/mathjax',
+          from: '**/*',
+          to: "lib/mathjax"
         }
       ]
     )

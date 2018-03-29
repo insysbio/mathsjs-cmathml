@@ -35,16 +35,11 @@ cases.forEach(function(item, i) {
         })
         $(`#mathJaxCMathMl${i}`).html(formulaCMathML.toString())
 
-        $('#navigate').append(
-          $('<a>', {href: `case${i}`, text: `Example #${i}: ${item}`}).append($('<br>'))
-        )
+        $('<li>')
+					.addClass('w3-border')
+					.append($('<a>', {href: `case${i}`, text: `Example #${i}: ${item}`}))
+					.appendTo($('#navigate'))
     }
-    /*
-    else {
-        document.getElementById("formula"+i).innerHTML = x+": Incorrect symbol"+(x.match(/[^\^*\/+-\w()_,. ]/) && x.match(/[^\^*\/+-\w()_,. ]/)[0]);
-				document.getElementById("navigate").innerHTML += `<a style="color:red" href='#data${i}'>Example #${i}: ${x}</a><br/>`;
-    }*/
-
 });
 
 
@@ -61,6 +56,11 @@ $('#superExpand').click(() => {
 })
 $('#fixSuperExpand').click(() => {
 	$(".mathjs").css("height", "auto");
+})
+
+$(".up").click(() => {
+	$('html, body').animate({scrollTop: 0},700);
+    return false;
 })
 
 function _createFormulaContainer(item, i) {
@@ -124,11 +124,9 @@ function _createFormulaContainer(item, i) {
     .appendTo(container)
 
   //up
-  $('<div>')
-    .addClass('w3-padding w3-circle w3-blue-grey w3-button')
-    .append($('<a>', {'href': '#navigate'})
-              .append($('<i>').addClass('fa fa-arrow-up'))
-            )
+  $('<button>')
+    .addClass('w3-padding w3-circle w3-blue-grey w3-button up')
+    .append($('<i>').addClass('fa fa-arrow-up'))
     .appendTo(container)
 
   $('<hr>').appendTo(container)

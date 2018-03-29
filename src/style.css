@@ -26,3 +26,7 @@ height:200px;
   background: #ccc;
   padding: 10px;
 }
+#navigate {
+	height: 350px;
+	overflow-y: auto; 
+}

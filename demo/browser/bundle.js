@@ -71,6 +71,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./cases/examples.json":
+/*!*****************************!*\
+  !*** ./cases/examples.json ***!
+  \*****************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, default */
+/***/ (function(module) {
+
+module.exports = ["Default*(kabs*C0)","(-vabs)/Default","k3*gal+k1*lac/K_l+k2*alac/K_a+k44*x1+k44*x2","V___1___+V___2___-V___3___-V___4___","1+K2_H1_D/10^(-6.3)+10^(-6.3)/K2_H2_D","alf_pH_D*(1+NAD/Kd_NAD_D+NADH/Kd_NADH_D)+bet_pH_D*(Hol/Kd_Hol_D+Hol*NAD/Kd_NAD_Hol_D/Kd_NAD_D)+gam_pH_D*(NADH*Hal/Kd_Hal_NADH_D/Kd_Hal_D+Hal/Kd_Hal_D+NAD*Hal/Kd_Hal_NAD_D/Kd_Hal_D+His*NADH/Kd_NADH_His_D/Kd_NADH_D+His/Kd_His_D)","(1+L_dm*F_dm^(n-1)*H_dm^n)/(1+L_dm*(F_dm*H_dm)^n)","V___5___*2.000-V___7___","SDH*((kf_SDH/(1+Sal/Ki_Sal_SDH))*Suc_SDH*Q_SDH-kr_SDH*Fum_SDH*QH2_SDH)/(1+Suc_SDH+Q_SDH*Km_i_Suc_SDH/Kd_es_Suc_SDH+Suc_SDH*Q_SDH+Fum_SDH+Km_Fum_SDH*QH2_SDH/Kd_ef_Fum_SDH+Fum_SDH*QH2_SDH)","1/v_mix","V_1*k2*(A1-A2)","t/60","k*(S-X1)/(1+X6^n/Ki^n)","23*s_4*exp(d*12)","rrr*pow(rrr, q)","45*min2(eee*33, k_1)","koff*min3(1,fun1,fun2)","k0*sin(t)","sqrt(e)","abs(-ppp)","-a+b+c","a >= b+c","koff <= min3(1,fun1,fun2)","1 > K2_H1_D/10^(-6.3)+10^(-6.3)/K2_H2_D","V___5___ < 2.000-V___7___","f(x, y, z) = x+y+z","E==mc^2","t==1 or t==2 or t ==3","x < 0 ? x + a : 20","f(a,b,c,d) = a > b ? c : d","f(x,y) = x-y > 0 ? x : y","f(x,y) = x / abs(x)","f(x,y,z) = (x-y > 0 ? x : y)-z > 0 ? (x-y > 0 ? x : y) : z","f(x, y, z) = x > 0 ? y + z :  y < 1 ? 12 : 8","f(x, y, z) = y < 1 ? (x < 2 ? 1: 4): 12 ","5","x*5.1","x*5.1e-3","x*5e-3","x < 2 ? 1: 4","(x < 2 ? 1: 4)","4+(a-3)"];
+
+/***/ }),
+
 /***/ "./lib/w3css/w3.css":
 /*!**************************!*\
   !*** ./lib/w3css/w3.css ***!
@@ -1296,7 +1307,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "hr{\r\n\theight:2px;\r\n\tcolor: black;\r\n\tbackground-color: black;\r\n}\r\nb{\r\n\tcolor: teal;\r\n}\r\n.node{\r\n\tcolor: teal;\r\n\tfont-weight: bold;\r\n}\r\n.json, textarea{\r\n\twidth: 80%;\r\n  padding: 10px;\r\n\toverflow: auto;\r\n}\r\n.json{\r\n\tborder: 1px solid grey;\r\n}\r\ntextarea{\r\nheight:200px;\r\n}\r\n\r\n#content p {\r\n  background: #ccc;\r\n  padding: 10px;\r\n}\r\n", ""]);
+exports.push([module.i, "hr{\r\n\theight:2px;\r\n\tcolor: black;\r\n\tbackground-color: black;\r\n}\r\nb{\r\n\tcolor: teal;\r\n}\r\n.node{\r\n\tcolor: teal;\r\n\tfont-weight: bold;\r\n}\r\n.mathjs, textarea{\r\n\twidth: 80%;\r\n  padding: 10px;\r\n\toverflow: auto;\r\n}\r\n.mathjs{\r\n\tborder: 1px solid grey;\r\n}\r\ntextarea{\r\nheight:200px;\r\n}\r\n\r\n#content p {\r\n  background: #ccc;\r\n  padding: 10px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -73319,6 +73330,10 @@ var _mathjs = __webpack_require__(/*! mathjs */ "./node_modules/mathjs/index.js"
 
 var _mathjs2 = _interopRequireDefault(_mathjs);
 
+var _examples = __webpack_require__(/*! ../cases/examples.json */ "./cases/examples.json");
+
+var _examples2 = _interopRequireDefault(_examples);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _mathjs2.default.import(__webpack_require__(/*! ./to_content_mathml */ "./src/to_content_mathml.js"));
@@ -73326,162 +73341,93 @@ _mathjs2.default.import(__webpack_require__(/*! ./to_content_mathml */ "./src/to
 //mathjs
 
 
-var node = void 0,
-    cont = void 0,
-    cases = [];
 var content = document.getElementById("content");
 
 //Get cases
-var xhr = new XMLHttpRequest();
-xhr.open("GET", "http://localhost:3000/cases/examples.json", false);
-xhr.send();
-if (xhr.responseText) {
-        cases = JSON.parse(xhr.responseText);
-} else {
-        console.log(xhr);
-}
 
-cases.forEach(function (x, i) {
-        /*Generate <div> with information about formula*/
-        var divData = document.createElement("div");
-        divData.setAttribute("id", "data" + i);
 
-        var header2 = document.createElement("h2");
-        header2.innerHTML = "Example #" + i;
-        divData.appendChild(header2);
+_examples2.default.forEach(function (item, i) {
+  _createFormulaContainer(item, i);
 
-        var button = document.createElement("button");
-        button.setAttribute("onclick", "compact(" + i + ")");
-        button.innerHTML = "<i class='fa fa-compress'></i>";
-        button.classList.add("w3-button", "w3-circle", "w3-purple", "w3-small", "w3-margin-bottom");
-        header2.appendChild(button);
+  var formulaMathjsParse = _mathjs2.default.parse(item),
+      formulaCMathML = formulaMathjsParse.toCMathML();
 
-        button = document.createElement("button");
-        button.setAttribute("onclick", "full(" + i + ")");
-        button.classList.add("w3-button", "w3-circle", "w3-indigo", "w3-small", "w3-margin-bottom", "w3-margin-left");
-        button.innerHTML = "<i class='fa fa-expand'></i>";
-        header2.appendChild(button);
+  if (formulaMathjsParse && formulaCMathML) {
+    (0, _jquery2.default)("#mathJaxTex" + i).text("$$" + formulaMathjsParse.toTex() + "$$");
+    (0, _jquery2.default)("#mathjs" + i).html(function () {
+      return JSON.stringify(formulaMathjsParse, null, 2).replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;");
+    });
+    (0, _jquery2.default)("#textarea" + i).val(function () {
+      return formulaCMathML.toString().replace(/></g, ">\n<");
+    });
+    (0, _jquery2.default)("#mathJaxCMathMl" + i).html(formulaCMathML.toString());
 
-        var header3 = document.createElement("h3");
-        header3.innerHTML = "input:";
-        divData.appendChild(header3);
-
-        var p = document.createElement("p");
-        p.innerHTML = x;
-        divData.appendChild(p);
-
-        header3 = document.createElement("h3");
-        header3.innerHTML = "parsing of input by math.js to Node object:";
-        divData.appendChild(header3);
-
-        var br = document.createElement("br");
-        divData.appendChild(br);
-
-        var innerDiv = document.createElement("div");
-        innerDiv.setAttribute("id", "json" + i);
-        innerDiv.setAttribute("class", "json");
-        divData.appendChild(innerDiv);
-
-        divData.appendChild(br);
-
-        header3 = document.createElement("h3");
-        header3.innerHTML = "cMathML produced by our code from Node object";
-        divData.appendChild(header3);
-
-        var textarea = document.createElement("textarea");
-        textarea.setAttribute("id", "textarea" + i);
-        divData.appendChild(textarea);
-
-        divData.appendChild(br);
-
-        header3 = document.createElement("h3");
-        header3.innerHTML = "MathJax presentation of TeX generated from input:";
-        divData.appendChild(header3);
-
-        innerDiv = document.createElement("div");
-        innerDiv.setAttribute("id", "formula" + i);
-        divData.appendChild(innerDiv);
-
-        header3 = document.createElement("h3");
-        header3.innerHTML = "MathJax presentation of cMathML generated by our code:";
-        divData.appendChild(header3);
-
-        innerDiv = document.createElement("div");
-        innerDiv.setAttribute("id", "cformula" + i);
-        innerDiv.setAttribute("style", "text-align:center");
-        divData.appendChild(innerDiv);
-
-        innerDiv = document.createElement("div");
-        innerDiv.setAttribute("style", "padding:20px;");
-        var link = document.createElement("a");
-        link.setAttribute("href", "#navigate");
-        link.innerHTML = "Up";
-        innerDiv.appendChild(link);
-        divData.appendChild(innerDiv);
-
-        var hr = document.createElement("hr");
-        divData.appendChild(hr);
-        content.appendChild(divData);
-
-        //var expTreeMathjs = math.parse(x);
-        var cMathML = null,
-            expTreeMathjs = null,
-            latexFormula = null;
-
-        var xhr = new XMLHttpRequest();
-        console.log(x);
-        xhr.open("GET", "/mathsToCMathML?formula=" + encodeURIComponent(x), false);
-        xhr.send();
-        if (xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                cMathML = response.cMathML;
-                expTreeMathjs = response.formula;
-                latexFormula = response.tex;
-        } else {
-                console.log(xhr);
-        }
-
-        if (cMathML) {
-
-                /*for output JSON mathjs expression tree*/
-                var JSON_mathjs = stripJSON(JSON.stringify(expTreeMathjs, null, 2));
-
-                /*for output cMathML-code*/
-                var sXML = cMathML;
-
-                /* Fill <div>*/
-                document.getElementById("formula" + i).innerHTML = "$$" + latexFormula + "$$";
-                document.getElementById("json" + i).innerHTML += JSON_mathjs + "<br/>";
-                document.getElementById("navigate").innerHTML += "<a href='#data" + i + "'>Example #" + i + ": " + x + "</a><br/>";
-                document.getElementById("textarea" + i).innerHTML = sXML.replace(/></g, ">\n<");
-                document.getElementById("cformula" + i).innerHTML = cMathML;
-        } else {
-                document.getElementById("formula" + i).innerHTML = x + ": Incorrect symbol" + (x.match(/[^\^*\/+-\w()_,. ]/) && x.match(/[^\^*\/+-\w()_,. ]/)[0]);
-                document.getElementById("navigate").innerHTML += "<a style=\"color:red\" href='#data" + i + "'>Example #" + i + ": " + x + "</a><br/>";
-        }
+    (0, _jquery2.default)('#navigate').append((0, _jquery2.default)('<a>', { href: "case" + i, text: "Example #" + i + ": " + item }).append((0, _jquery2.default)('<br>')));
+  }
+  /*
+  else {
+      document.getElementById("formula"+i).innerHTML = x+": Incorrect symbol"+(x.match(/[^\^*\/+-\w()_,. ]/) && x.match(/[^\^*\/+-\w()_,. ]/)[0]);
+  document.getElementById("navigate").innerHTML += `<a style="color:red" href='#data${i}'>Example #${i}: ${x}</a><br/>`;
+  }*/
 });
 
-//Subscribe functions
-function stripJSON(cont) {
-        cont = cont.replace(/\n/g, "<br/>");
-        cont = cont.replace(/ /g, "&nbsp;");
-        return cont;
-}
+(0, _jquery2.default)('#superCompress').click(function () {
+  (0, _jquery2.default)(".mathjs").css("height", "300px");
+});
+(0, _jquery2.default)('#fixSuperComress').click(function () {
+  (0, _jquery2.default)(".mathjs").css("height", "300px");
+});
+(0, _jquery2.default)('#superExpand').click(function () {
+  (0, _jquery2.default)(".mathjs").css("height", "auto");
+});
+(0, _jquery2.default)('#fixSuperExpand').click(function () {
+  (0, _jquery2.default)(".mathjs").css("height", "auto");
+});
 
-function compact(n) {
-        if (n >= 0) {
-                document.getElementsByClassName("json")[n].style.height = "300px";
-        } else {
-                (0, _jquery2.default)(".json").css("height", "300px");
-        }
-}
+function _createFormulaContainer(item, i) {
+  var container = (0, _jquery2.default)('<div>', { 'id': "case" + i }).appendTo((0, _jquery2.default)('#content'));
 
-function full(n) {
-        if (n >= 0) {
-                document.getElementsByClassName("json")[n].style.height = "auto";
-        } else {
-                (0, _jquery2.default)(".json").css("height", "auto");
-        }
+  //Header of
+  (0, _jquery2.default)('<h2>', { 'text': "Example #" + i }).appendTo(container);
+
+  //Minify btn
+  (0, _jquery2.default)('<button>').addClass("w3-button w3-circle w3-purple w3-small w3-margin-bottom").click(function () {
+    (0, _jquery2.default)("#mathjs" + i).css("height", "300px");
+  }).append((0, _jquery2.default)('<i>').addClass('fa fa-compress')).appendTo(container);
+
+  //Expand btn
+  (0, _jquery2.default)('<button>').addClass("w3-button w3-circle w3-indigo w3-small w3-margin-bottom w3-margin-left").click(function () {
+    (0, _jquery2.default)("#mathjs" + i).css("height", "auto");
+  }).append((0, _jquery2.default)('<i>').addClass('fa fa-expand')).appendTo(container);
+
+  (0, _jquery2.default)('<h3>', { 'text': 'Input:' }).appendTo(container);
+
+  //Native caption formula
+  (0, _jquery2.default)('<p>', { 'text': item }).appendTo(container);
+  (0, _jquery2.default)('<h3>', { text: 'parsing of input by math.js to Node object:' }).addClass('w3-margin-bottom').appendTo(container);
+
+  //div for mathjs-parsed formula
+  (0, _jquery2.default)('<div>', { 'id': "mathjs" + i }).addClass('mathjs w3-margin-bottom').appendTo(container);
+
+  (0, _jquery2.default)('<h3>', { text: 'cMathML produced by our code from Node object:' }).appendTo(container);
+
+  //textarea for cMathML
+  (0, _jquery2.default)('<textarea>', { 'id': "textarea" + i }).addClass('w3-margin-bottom').appendTo(container);
+
+  (0, _jquery2.default)('<h3>', { text: 'MathJax presentation of TeX generated from input:' }).appendTo(container);
+
+  //tex-formula
+  (0, _jquery2.default)('<div>', { 'id': "mathJaxTex" + i }).appendTo(container);
+
+  (0, _jquery2.default)('<h3>', { text: 'MathJax presentation of cMathML generated by our code:' }).appendTo(container);
+
+  //CMathMl-formula
+  (0, _jquery2.default)('<div>', { 'id': "mathJaxCMathMl" + i }).addClass('w3-center').appendTo(container);
+
+  //up
+  (0, _jquery2.default)('<div>').addClass('w3-padding w3-circle w3-blue-grey w3-button').append((0, _jquery2.default)('<a>', { 'href': '#navigate' }).append((0, _jquery2.default)('<i>').addClass('fa fa-arrow-up'))).appendTo(container);
+
+  (0, _jquery2.default)('<hr>').appendTo(container);
 }
 
 /***/ }),
