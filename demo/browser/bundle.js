@@ -1307,7 +1307,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "hr{\r\n\theight:2px;\r\n\tcolor: black;\r\n\tbackground-color: black;\r\n}\r\nb{\r\n\tcolor: teal;\r\n}\r\n.node{\r\n\tcolor: teal;\r\n\tfont-weight: bold;\r\n}\r\n.mathjs, textarea{\r\n\twidth: 80%;\r\n  padding: 10px;\r\n\toverflow: auto;\r\n}\r\n.mathjs{\r\n\tborder: 1px solid grey;\r\n}\r\ntextarea{\r\nheight:200px;\r\n}\r\n\r\n#content p {\r\n  background: #ccc;\r\n  padding: 10px;\r\n}\r\n", ""]);
+exports.push([module.i, "hr{\r\n\theight:2px;\r\n\tcolor: black;\r\n\tbackground-color: black;\r\n}\r\nb{\r\n\tcolor: teal;\r\n}\r\n.node{\r\n\tcolor: teal;\r\n\tfont-weight: bold;\r\n}\r\n.mathjs, textarea{\r\n\twidth: 80%;\r\n  padding: 10px;\r\n\toverflow: auto;\r\n}\r\n.mathjs{\r\n\tborder: 1px solid grey;\r\n}\r\ntextarea{\r\nheight:200px;\r\n}\r\n\r\n#content p {\r\n  background: #ccc;\r\n  padding: 10px;\r\n}\r\n#navigate {\r\n\theight: 350px;\r\n\toverflow-y: auto; \r\n}\r\n", ""]);
 
 // exports
 
@@ -73362,13 +73362,8 @@ _examples2.default.forEach(function (item, i) {
     });
     (0, _jquery2.default)("#mathJaxCMathMl" + i).html(formulaCMathML.toString());
 
-    (0, _jquery2.default)('#navigate').append((0, _jquery2.default)('<a>', { href: "case" + i, text: "Example #" + i + ": " + item }).append((0, _jquery2.default)('<br>')));
+    (0, _jquery2.default)('<li>').addClass('w3-border').append((0, _jquery2.default)('<a>', { href: "case" + i, text: "Example #" + i + ": " + item })).appendTo((0, _jquery2.default)('#navigate'));
   }
-  /*
-  else {
-      document.getElementById("formula"+i).innerHTML = x+": Incorrect symbol"+(x.match(/[^\^*\/+-\w()_,. ]/) && x.match(/[^\^*\/+-\w()_,. ]/)[0]);
-  document.getElementById("navigate").innerHTML += `<a style="color:red" href='#data${i}'>Example #${i}: ${x}</a><br/>`;
-  }*/
 });
 
 (0, _jquery2.default)('#superCompress').click(function () {
@@ -73382,6 +73377,11 @@ _examples2.default.forEach(function (item, i) {
 });
 (0, _jquery2.default)('#fixSuperExpand').click(function () {
   (0, _jquery2.default)(".mathjs").css("height", "auto");
+});
+
+(0, _jquery2.default)(".up").click(function () {
+  (0, _jquery2.default)('html, body').animate({ scrollTop: 0 }, 700);
+  return false;
 });
 
 function _createFormulaContainer(item, i) {
@@ -73425,7 +73425,7 @@ function _createFormulaContainer(item, i) {
   (0, _jquery2.default)('<div>', { 'id': "mathJaxCMathMl" + i }).addClass('w3-center').appendTo(container);
 
   //up
-  (0, _jquery2.default)('<div>').addClass('w3-padding w3-circle w3-blue-grey w3-button').append((0, _jquery2.default)('<a>', { 'href': '#navigate' }).append((0, _jquery2.default)('<i>').addClass('fa fa-arrow-up'))).appendTo(container);
+  (0, _jquery2.default)('<button>').addClass('w3-padding w3-circle w3-blue-grey w3-button up').append((0, _jquery2.default)('<i>').addClass('fa fa-arrow-up')).appendTo(container);
 
   (0, _jquery2.default)('<hr>').appendTo(container);
 }
@@ -73475,155 +73475,164 @@ if(false) {}
 var DOMParser = __webpack_require__(/*! xmldom */ "./node_modules/xmldom/dom-parser.js").DOMParser;
 var XMLSerializer = __webpack_require__(/*! xmldom */ "./node_modules/xmldom/dom-parser.js").XMLSerializer;
 var dictFunc = __webpack_require__(/*! ./dictionaryFunction.json */ "./src/dictionaryFunction.json");
+
 exports.name = "toCMathML";
 exports.path = "expression.node.Node.prototype";
 exports.factory = function (type, config, load, typed) {
-  return function () {
-    if (!_validate(this.toString())) {
+  return cMathMl.apply(this);
+};
+
+if (typeof window !== 'undefined' && typeof window['math'] !== 'undefined') {
+  window['math'].expression.node.Node.prototype.toCMathML = function (type, config, load, typed) {
+    return cMathMl.apply(this);
+  };
+}
+
+var cMathMl = function cMathMl() {
+  if (!_validate(this.toString())) {
+    return false;
+  }
+
+  var XMLDocument = new DOMParser().parseFromString("<math xmlns='http://www.w3.org/1998/Math/MathML'/>", "text/xml");
+
+  _traverse(XMLDocument.documentElement, this);
+
+  return XMLDocument;
+
+  function _traverse(parentXML, node) {
+    switch (node && node.type.trim()) {
+      case 'SymbolNode':
+        _parseSymbolNode(parentXML, node);
+        break;
+      case 'ConstantNode':
+        _parseConstantNode(parentXML, node);
+        break;
+      case 'FunctionNode':
+        _parseFunctionNode(parentXML, node);
+        break;
+      /* falls through */
+      case 'OperatorNode':
+        _parseOperatorNode(parentXML, node);
+        break;
+      case 'ParenthesisNode':
+        _parseParenthesisNode(parentXML, node);
+        break;
+      case 'AccessorNode':
+      /* falls through */
+      case 'ArrayNode':
+      /* falls through */
+      case 'AssignmentNode':
+      /* falls through */
+      case 'BlockNode':
+      /* falls through */
+      case 'FunctionAssignmentNode':
+        _parseFunctionAssignmentNode(parentXML, node);
+        break;
+      /* falls through */
+      case 'IndexNode':
+      /* falls through */
+      case 'ObjectNode':
+      /* falls through */
+      case 'RangeNode':
+      /* falls through */
+      case 'UpdateNode':
+      /* falls through */
+      case 'ConditionalNode':
+        _parseConditionalNode(parentXML, node);
+        break;
+      /* falls through */
+      default:
+        console.log("ups", node && node.type, node);
+      //throw 'Unimplemented node type in simplifyConstant: '+node.type;
+    }
+  }
+
+  function _parseSymbolNode(parentXML, node) {
+    var XMLNode = XMLDocument.createElement("ci");
+    XMLNode.appendChild(XMLDocument.createTextNode(node.name));
+    parentXML.appendChild(XMLNode);
+  }
+
+  function _parseConstantNode(parentXML, node) {
+    var XMLNode = XMLDocument.createElement("cn");
+    if (String(node.value).match(/^[\d]+[.]?[\d]*[e][+-][\d]+$/)) {
+      XMLNode.setAttribute("type", "e-notation");
+      var value = String(node.value).match(/^([\d]+[.]?[\d]*)[e]([+-][\d]+)$/);
+      XMLNode.appendChild(XMLDocument.createTextNode(value[1]));
+      XMLNode.appendChild(XMLDocument.createElement("sep"));
+      XMLNode.appendChild(XMLDocument.createTextNode(value[2]));
+    } else {
+      XMLNode.appendChild(XMLDocument.createTextNode(node.value));
+    }
+
+    parentXML.appendChild(XMLNode);
+  }
+
+  function _parseFunctionNode(parentXML, node) {
+    var apply = XMLDocument.createElement("apply");
+    apply.appendChild(XMLDocument.createElement(dictFunc[node.fn.name]));
+    if (node.args) {
+      node.args.forEach(function (item) {
+        _traverse(apply, item);
+      });
+    }
+    parentXML.appendChild(apply);
+  }
+
+  function _parseParenthesisNode(parentXML, node) {
+    _traverse(parentXML, node.content);
+  }
+
+  function _parseOperatorNode(parentXML, node) {
+    var apply = XMLDocument.createElement("apply");
+    apply.appendChild(XMLDocument.createElement(dictFunc[node.fn]));
+
+    if (node.args) {
+      node.args.forEach(function (item) {
+        _traverse(apply, item);
+      });
+    }
+
+    parentXML.appendChild(apply);
+  }
+
+  function _parseFunctionAssignmentNode(parentXML, node) {
+    var lambda = XMLDocument.createElement("lambda");
+
+    node.params.forEach(function (item) {
+      var bvar = XMLDocument.createElement("bvar");
+      var param = XMLDocument.createElement("ci");
+      param.appendChild(XMLDocument.createTextNode(item)); //var text = document.createTextNode(data);
+      bvar.appendChild(param);
+      lambda.appendChild(bvar);
+    });
+
+    if (node.expr) _traverse(lambda, node.expr);
+
+    parentXML.appendChild(lambda);
+  }
+
+  function _parseConditionalNode(parentXML, node) {
+    var piecewise = XMLDocument.createElement("piecewise");
+    var piece = XMLDocument.createElement("piece");
+    var otherwise = XMLDocument.createElement("otherwise");
+
+    if (node.trueExpr) _traverse(piece, node.trueExpr);
+    if (node.falseExpr) _traverse(otherwise, node.falseExpr);
+    if (node.condition) _traverse(piece, node.condition);
+
+    piecewise.appendChild(piece);
+    piecewise.appendChild(otherwise);
+    parentXML.appendChild(piecewise);
+  }
+
+  function _validate(formula) {
+    if (formula.match(/[^\^*\/+-\w()_,.\>\<\= \?\:]/) == null) {
+      return true;
+    } else {
       return false;
     }
-
-    var XMLDocument = new DOMParser().parseFromString("<math xmlns='http://www.w3.org/1998/Math/MathML'/>", "text/xml");
-
-    _traverse(XMLDocument.documentElement, this);
-
-    return XMLDocument;
-
-    function _traverse(parentXML, node) {
-      switch (node && node.type.trim()) {
-        case 'SymbolNode':
-          _parseSymbolNode(parentXML, node);
-          break;
-        case 'ConstantNode':
-          _parseConstantNode(parentXML, node);
-          break;
-        case 'FunctionNode':
-          _parseFunctionNode(parentXML, node);
-          break;
-        /* falls through */
-        case 'OperatorNode':
-          _parseOperatorNode(parentXML, node);
-          break;
-        case 'ParenthesisNode':
-          _parseParenthesisNode(parentXML, node);
-          break;
-        case 'AccessorNode':
-        /* falls through */
-        case 'ArrayNode':
-        /* falls through */
-        case 'AssignmentNode':
-        /* falls through */
-        case 'BlockNode':
-        /* falls through */
-        case 'FunctionAssignmentNode':
-          _parseFunctionAssignmentNode(parentXML, node);
-          break;
-        /* falls through */
-        case 'IndexNode':
-        /* falls through */
-        case 'ObjectNode':
-        /* falls through */
-        case 'RangeNode':
-        /* falls through */
-        case 'UpdateNode':
-        /* falls through */
-        case 'ConditionalNode':
-          _parseConditionalNode(parentXML, node);
-          break;
-        /* falls through */
-        default:
-          console.log("ups", node && node.type, node);
-        //throw 'Unimplemented node type in simplifyConstant: '+node.type;
-      }
-    }
-
-    function _parseSymbolNode(parentXML, node) {
-      var XMLNode = XMLDocument.createElement("ci");
-      XMLNode.appendChild(XMLDocument.createTextNode(node.name));
-      parentXML.appendChild(XMLNode);
-    }
-
-    function _parseConstantNode(parentXML, node) {
-      var XMLNode = XMLDocument.createElement("cn");
-      if (String(node.value).match(/^[\d]+[.]?[\d]*[e][+-][\d]+$/)) {
-        XMLNode.setAttribute("type", "e-notation");
-        var value = String(node.value).match(/^([\d]+[.]?[\d]*)[e]([+-][\d]+)$/);
-        XMLNode.appendChild(XMLDocument.createTextNode(value[1]));
-        XMLNode.appendChild(XMLDocument.createElement("sep"));
-        XMLNode.appendChild(XMLDocument.createTextNode(value[2]));
-      } else {
-        XMLNode.appendChild(XMLDocument.createTextNode(node.value));
-      }
-
-      parentXML.appendChild(XMLNode);
-    }
-
-    function _parseFunctionNode(parentXML, node) {
-      var apply = XMLDocument.createElement("apply");
-      apply.appendChild(XMLDocument.createElement(dictFunc[node.fn.name]));
-      if (node.args) {
-        node.args.forEach(function (item) {
-          _traverse(apply, item);
-        });
-      }
-      parentXML.appendChild(apply);
-    }
-
-    function _parseParenthesisNode(parentXML, node) {
-      _traverse(parentXML, node.content);
-    }
-
-    function _parseOperatorNode(parentXML, node) {
-      var apply = XMLDocument.createElement("apply");
-      apply.appendChild(XMLDocument.createElement(dictFunc[node.fn]));
-
-      if (node.args) {
-        node.args.forEach(function (item) {
-          _traverse(apply, item);
-        });
-      }
-
-      parentXML.appendChild(apply);
-    }
-
-    function _parseFunctionAssignmentNode(parentXML, node) {
-      var lambda = XMLDocument.createElement("lambda");
-
-      node.params.forEach(function (item) {
-        var bvar = XMLDocument.createElement("bvar");
-        var param = XMLDocument.createElement("ci");
-        param.appendChild(XMLDocument.createTextNode(item)); //var text = document.createTextNode(data);
-        bvar.appendChild(param);
-        lambda.appendChild(bvar);
-      });
-
-      if (node.expr) _traverse(lambda, node.expr);
-
-      parentXML.appendChild(lambda);
-    }
-
-    function _parseConditionalNode(parentXML, node) {
-      var piecewise = XMLDocument.createElement("piecewise");
-      var piece = XMLDocument.createElement("piece");
-      var otherwise = XMLDocument.createElement("otherwise");
-
-      if (node.trueExpr) _traverse(piece, node.trueExpr);
-      if (node.falseExpr) _traverse(otherwise, node.falseExpr);
-      if (node.condition) _traverse(piece, node.condition);
-
-      piecewise.appendChild(piece);
-      piecewise.appendChild(otherwise);
-      parentXML.appendChild(piecewise);
-    }
-
-    function _validate(formula) {
-      if (formula.match(/[^\^*\/+-\w()_,.\>\<\= \?\:]/) == null) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
+  }
 };
 
 /***/ })

@@ -1,15 +1,16 @@
 {
-  "name": "math",
+  "name": "mathjs.toCMathML",
   "version": "1.0.0",
   "description": "",
   "sideEffects": false,
-  "main": "index.js",
+  "main": "src/to_content_mathml.js",
   "scripts": {
     "start": "node index.js",
     "dev": "webpack-dev-server --config webpack-dev.config.js --content-base ./demo/browser/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run clean clean && webpack --config webpack-dev.config.js",
-    "clean": "rimraf ./demo/browser/*"
+    "clean": "rimraf ./demo/browser/*",
+    "production": "webpack --config webpack-build.config.js"
   },
   "author": "",
   "license": "ISC",

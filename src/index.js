@@ -19,7 +19,7 @@ cases.forEach(function(item, i) {
 	_createFormulaContainer(item, i)
 
   const formulaMathjsParse = math.parse(item),
-    formulaCMathML = formulaMathjsParse.toCMathML();
+    		formulaCMathML = formulaMathjsParse.toCMathML();
 
   if (formulaMathjsParse && formulaCMathML) {
         $(`#mathJaxTex${i}`).text(`$$${formulaMathjsParse.toTex()}$$`)
