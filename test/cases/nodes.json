@@ -1,0 +1,30 @@
+{
+  "SymbolNode": {
+    "formula": "a",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><ci>a</ci></math>"
+  },
+  "ConstantNode": {
+    "formula": "1",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><cn>1</cn></math>"
+  },
+  "FunctionNode": {
+    "formula": "f(x)",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><f/><ci>x</ci></apply></math>"
+  },
+  "OperatorNode": {
+    "formula": "x+1",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><plus/><ci>x</ci><cn>1</cn></apply></math>"
+  },
+  "ParenthesisNode": {
+    "formula": "(1)",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><cn>1</cn></apply></math>"
+  },
+  "FunctionAssignmentNode": {
+    "formula": "f(x) = x",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><lambda><bvar><ci>x</ci></bvar><ci>x</ci></lambda></math>"
+  },
+  "ConditionalNode": {
+    "formula": "a > 0 ? a : -a",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><piecewise><piece><ci>a</ci><apply><gt/><ci>a</ci><cn>0</cn></apply></piece><otherwise><apply><minus/><ci>a</ci></apply></otherwise></piecewise></math>"
+  }
+}
