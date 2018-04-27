@@ -1,7 +1,5 @@
 'use strict';
 
-const XMLDocument = require('../XMLDocument');
-
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.ParenthesisNode.prototype';
 exports.factory = function() {
@@ -11,7 +9,7 @@ exports.factory = function() {
 };
 
 function _toCMathMLNode(parentXML) {
-  let apply = new XMLDocument().createElement('apply');
+  let apply = parentXML.ownerDocument.createElement('apply');
   this.content.toCMathMLNode(apply);
   parentXML.appendChild(apply);
 }

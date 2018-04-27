@@ -1,7 +1,6 @@
 'use strict';
 
-const XMLDocument = require('../XMLDocument');
-const dictFunc = require('../dictionaryFunction.json');
+const dictFunc = require('../dictionaryFunction');
 
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.OperatorNode.prototype';
@@ -12,8 +11,8 @@ exports.factory = function() {
 };
 
 function _toCMathMLNode(parentXML) {
-  let apply = new XMLDocument().createElement('apply');
-  apply.appendChild(new XMLDocument().createElement(dictFunc[this.fn]));
+  let apply = parentXML.ownerDocument.createElement('apply');
+  apply.appendChild(parentXML.ownerDocument.createElement(dictFunc[this.fn]));
 
   if (this.args) {
     this.args.forEach((item) => {

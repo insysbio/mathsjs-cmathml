@@ -1,7 +1,5 @@
 'use strict';
 
-const XMLDocument = require('../XMLDocument');
-
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.FunctionAssignmentNode.prototype';
 exports.factory = function() {
@@ -11,12 +9,12 @@ exports.factory = function() {
 };
 
 function _toCMathMLNode(parentXML) {
-  var lambda = new XMLDocument().createElement('lambda');
+  var lambda = parentXML.ownerDocument.createElement('lambda');
 
   this.params.forEach(function(item) {
-    var bvar = new XMLDocument().createElement('bvar');
-    var param = new XMLDocument().createElement('ci');
-    param.appendChild(new XMLDocument().createTextNode(item));
+    var bvar = parentXML.ownerDocument.createElement('bvar');
+    var param = parentXML.ownerDocument.createElement('ci');
+    param.appendChild(parentXML.ownerDocument.createTextNode(item));
     bvar.appendChild(param);
     lambda.appendChild(bvar);
   });

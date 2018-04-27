@@ -1,8 +1,6 @@
 /*eslint complexity: ["error", 4]*/
 'use strict';
 
-const XMLDocument = require('../XMLDocument');
-
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.ConditionalNode.prototype';
 exports.factory = function() {
@@ -12,9 +10,9 @@ exports.factory = function() {
 };
 
 function _toCMathMLNode(parentXML) {
-  var piecewise = new XMLDocument().createElement('piecewise');
-  var piece = new XMLDocument().createElement('piece');
-  var otherwise = new XMLDocument().createElement('otherwise');
+  var piecewise = parentXML.ownerDocument.createElement('piecewise');
+  var piece = parentXML.ownerDocument.createElement('piece');
+  var otherwise = parentXML.ownerDocument.createElement('otherwise');
 
   if(this.trueExpr) this.trueExpr.toCMathMLNode(piece);
   if(this.falseExpr) this.falseExpr.toCMathMLNode(otherwise);

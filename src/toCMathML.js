@@ -1,7 +1,7 @@
 'use strict';
 /*global window:true*/
 
-const XMLDocument = require('./XMLDocument');
+const MathMLDocument = require('./MathMLDocument');
 const math = require('mathjs');
 
 math.import(require('./node/Node.js'));
@@ -32,17 +32,13 @@ let _cMathMl = function() {
     return false;
   }
 
-  let document = new XMLDocument();
+  let document = new MathMLDocument();
   this.toCMathMLNode(document.documentElement);
-  
+
   return document;
 };
 
 function _validate(formula) {
-  if (formula.match(/[^\^*\/+-\w()_,.\>\<\= \?\:]/) == null) {
-    return true;
-  }
-  else {
-    return false;
-  }
+  let isWrong = /[^*/+-\w()_,.><= ?:]/.test(formula);
+  return !isWrong;
 }
