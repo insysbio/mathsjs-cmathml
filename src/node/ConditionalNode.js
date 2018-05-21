@@ -1,13 +1,26 @@
 /*eslint complexity: ["error", 4]*/
+/*global window:true*/
 'use strict';
 
-exports.name = 'toCMathMLNode';
-exports.path = 'expression.node.ConditionalNode.prototype';
-exports.factory = function() {
-  return function() {
-    return _toCMathMLNode.apply(this, arguments);
+const jsEnv = require('browser-or-node');
+
+if (jsEnv.isBrowser) {
+  window['math'].expression.node.ConditionalNode.prototype.toCMathMLNode = function() {
+    return _toCMathMLNode.apply(this);
   };
-};
+}
+
+if (jsEnv.isNode) {
+  exports.name = 'toCMathMLNode';
+  exports.path = 'expression.node.ConditionalNode.prototype';
+  exports.factory = function() {
+    return function() {
+      return _toCMathMLNode.apply(this, arguments);
+    };
+  };
+}
+
+
 
 function _toCMathMLNode(parentXML) {
   var piecewise = parentXML.ownerDocument.createElement('piecewise');

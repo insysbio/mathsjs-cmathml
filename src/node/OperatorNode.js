@@ -1,14 +1,25 @@
+/*global window:true*/
 'use strict';
 
-const dictFunc = require('../dictionaryFunction');
+const jsEnv = require('browser-or-node');
 
-exports.name = 'toCMathMLNode';
-exports.path = 'expression.node.OperatorNode.prototype';
-exports.factory = function() {
-  return function() {
-    return _toCMathMLNode.apply(this, arguments);
+if (jsEnv.isBrowser) {
+  window['math'].expression.node.OperatorNode.prototype.toCMathMLNode = function() {
+    return _toCMathMLNode.apply(this);
   };
-};
+}
+
+if (jsEnv.isNode) {
+  exports.name = 'toCMathMLNode';
+  exports.path = 'expression.node.OperatorNode.prototype';
+  exports.factory = function() {
+    return function() {
+      return _toCMathMLNode.apply(this, arguments);
+    };
+  };
+}
+
+const dictFunc = require('../dictionaryFunction');
 
 function _toCMathMLNode(parentXML) {
   let apply = parentXML.ownerDocument.createElement('apply');

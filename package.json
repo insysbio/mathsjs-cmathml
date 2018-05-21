@@ -23,6 +23,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
+    "browser-or-node": "^1.0.2",
     "mathjs": "^4.0.1",
     "xmldom": "^0.1.27"
   },

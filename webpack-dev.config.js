@@ -1,26 +1,27 @@
-const webpack = require("webpack"),
-      CopyWebpackPlugin = require('copy-webpack-plugin')
+'use strict';
+const webpack = require('webpack'),
+  CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  devtool: "source-map",
-  entry: "./src/index.js",
-  mode: "development",
+  devtool: 'source-map',
+  entry: './src/index.js',
+  mode: 'development',
   output: {
-    path: __dirname+"/demo/browser",
-    filename: "bundle.js"
+    path: __dirname+'/demo/browser',
+    filename: 'bundle.js'
   },
   plugins: [
     new CopyWebpackPlugin(
       [
         {
           from: './src/index.html',
-          to: "index.html"
+          to: 'index.html'
         },
         {
           context: './lib/mathjax',
           from: '**/*',
-          to: "lib/mathjax"
+          to: 'lib/mathjax'
         }
       ]
     )
@@ -31,22 +32,22 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
-        presets: ['es2015']
-      }
+          presets: ['es2015']
+        }
       },
       {
-         test: /\.css$/,
-         use: [
-           'style-loader',
-           'css-loader'
-         ]
-       },
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
       {
-        "test": /\.(xsl|svg|png|eot|ttf|woff|woff2)$/,
+        'test': /\.(xsl|svg|png|eot|ttf|woff|woff2)$/,
         use: [
           'file-loader'
         ]
       }
-     ]
-   }
-}
+    ]
+  }
+};
