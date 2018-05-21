@@ -4,8 +4,7 @@ const webpack = require('webpack'),
 
 module.exports = {
   context: __dirname,
-  devtool: 'source-map',
-  entry: './src/to_content_mathml',
+  entry: './src',
   mode: 'production',
   output: {
     path: __dirname+'/dist',

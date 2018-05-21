@@ -5,7 +5,7 @@ const jsEnv = require('browser-or-node');
 
 if (jsEnv.isBrowser) {
   window['math'].expression.node.ConstantNode.prototype.toCMathMLNode = function() {
-    return _toCMathMLNode.apply(this);
+    return _toCMathMLNode.apply(this, arguments);
   };
 }
 

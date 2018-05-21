@@ -8,8 +8,8 @@
     "dev": "webpack-dev-server --config webpack-dev.config.js --content-base ./demo/browser/index.html",
     "test:index": "node ./test/draft/manual_test.js",
     "test": "mocha",
-    "build": "npm run clean clean && webpack --config webpack-dev.config.js",
-    "clean": "rimraf ./lib",
+    "build": "npm run clean && webpack --config webpack-build.config.js",
+    "clean": "rimraf ./dist",
     "production": "webpack --config webpack-build.config.js",
     "lint": "eslint --ext .js -o lint.report.html -f html src"
   },
