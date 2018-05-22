@@ -6,7 +6,7 @@ module.exports = {
   entry: './src',
   mode: 'production',
   output: {
-    path: __dirname+'/dist',
+    path: __dirname+'/demo',
     filename: 'mathjs.toCMathML.min.js'
   },
   devtool: 'source-map',

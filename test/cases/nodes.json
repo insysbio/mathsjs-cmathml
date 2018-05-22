@@ -26,5 +26,13 @@
   "ConditionalNode": {
     "formula": "a > 0 ? a : -a",
     "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><piecewise><piece><ci>a</ci><apply><gt/><ci>a</ci><cn>0</cn></apply></piece><otherwise><apply><minus/><ci>a</ci></apply></otherwise></piecewise></math>"
+  },
+  "AssignmentNode(simple)": {
+    "formula": "x = 5",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><eq/><ci>x</ci><cn>5</cn></apply></math>"
+  },
+  "AssignmentNode": {
+    "formula": "x = a + 1",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><eq/><ci>x</ci><apply><plus/><ci>a</ci><cn>1</cn></apply></apply></math>"
   }
 }

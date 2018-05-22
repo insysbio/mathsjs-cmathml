@@ -9,6 +9,7 @@ const FunctionNode = require('./node/FunctionNode.js');
 const OperatorNode = require('./node/OperatorNode.js');
 const ParenthesisNode = require('./node/ParenthesisNode.js');
 const FunctionAssignmentNode = require('./node/FunctionAssignmentNode.js');
+const AssignmentNode = require('./node/AssignmentNode.js');
 const ConditionalNode = require('./node/ConditionalNode.js');
 
 const jsEnv = require('browser-or-node');
@@ -23,6 +24,7 @@ if (jsEnv.isNode) {
   math.import(OperatorNode);
   math.import(ParenthesisNode);
   math.import(FunctionAssignmentNode);
+  math.import(AssignmentNode);
   math.import(ConditionalNode);
 
   exports.name = 'toCMathML';
