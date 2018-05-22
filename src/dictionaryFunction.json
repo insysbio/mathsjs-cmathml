@@ -42,5 +42,6 @@
     "smallerEq": "leq",
     "smaller": "lt",
     "equal" : "eq",
-    "unequal" : "neq"
+    "unequal" : "neq",
+    "or": "or"
     }
