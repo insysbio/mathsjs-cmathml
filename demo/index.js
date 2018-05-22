@@ -1,4 +1,4 @@
-/*global $, document, XMLSerializer cases math:true*/
+/*global $,XMLSerializer cases math:true*/
 'use strict';
 
 const serializer = new XMLSerializer();
@@ -6,11 +6,8 @@ const serializer = new XMLSerializer();
 cases.forEach(function(item, i) {
   _createFormulaContainer(item, i);
 
-  	let formulaMathjsParse = math.parse(item),
-    formulaCMathML = formulaMathjsParse.toCMathML();
-
-
-  console.log(formulaMathjsParse, formulaCMathML);
+  let formulaMathjsParse = math.parse(item);
+  let formulaCMathML = formulaMathjsParse.toCMathML();
 
   if (formulaMathjsParse && formulaCMathML) {
     $(`#mathJaxTex${i}`).text(`$$${formulaMathjsParse.toTex()}$$`);

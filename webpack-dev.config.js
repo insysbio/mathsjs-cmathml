@@ -1,32 +1,15 @@
 'use strict';
-const webpack = require('webpack'),
-  CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  devtool: 'source-map',
-  entry: './src/index.js',  
-  devtool: 'source-map',
-  mode: 'development',
+  entry: './src',
+  mode: 'production',
   output: {
-    path: __dirname+'/demo/browser',
-    filename: 'bundle.js'
+    path: __dirname+'/dist',
+    filename: 'mathjs.toCMathML.min.js'
   },
-  plugins: [
-    new CopyWebpackPlugin(
-      [
-        {
-          from: './src/index.html',
-          to: 'index.html'
-        },
-        {
-          context: './lib/mathjax',
-          from: '**/*',
-          to: 'lib/mathjax'
-        }
-      ]
-    )
-  ],
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -35,19 +18,6 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        'test': /\.(xsl|svg|png|eot|ttf|woff|woff2)$/,
-        use: [
-          'file-loader'
-        ]
       }
     ]
   }

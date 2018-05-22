@@ -5,7 +5,7 @@
   "sideEffects": false,
   "main": "src/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack-dev.config.js --content-base ./demo/browser/index.html",
+    "dev": "webpack-dev-server --config webpack-dev.config.js --content-base ./demo",
     "test:index": "node ./test/draft/manual_test.js",
     "test": "mocha",
     "build": "npm run clean && webpack --config webpack-build.config.js",

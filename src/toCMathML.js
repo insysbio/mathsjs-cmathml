@@ -52,6 +52,6 @@ let _cMathMl = function() {
 };
 
 function _validate(formula) {
-  let isWrong = /[^*/+-\w()_,.><= ?:]/.test(formula);
+  let isWrong = /^[^*/+-\w()_,.><= ?:]/.test(formula);// /[^\^*\/+-\w()_,.\>\<\= \?\:]/
   return !isWrong;
 }
