@@ -1,9 +1,7 @@
 /*global window:true*/
 'use strict';
-
-const jsEnv = require('browser-or-node');
 const MathMLDocument = require('./MathMLDocument');
-
+const {jsEnv} = require('./isEnv');
 
 const Node = require('./node/Node.js');
 const SymbolNode = require('./node/SymbolNode.js');

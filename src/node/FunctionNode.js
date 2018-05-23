@@ -1,7 +1,7 @@
 /*global window:true*/
 'use strict';
 
-const jsEnv = require('browser-or-node');
+const {jsEnv} = require('../isEnv');
 
 if (jsEnv.isBrowser) {
   window['math'].expression.node.FunctionNode.prototype.toCMathMLNode = function() {
