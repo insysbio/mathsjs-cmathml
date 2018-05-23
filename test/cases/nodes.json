@@ -34,5 +34,9 @@
   "AssignmentNode": {
     "formula": "x = a + 1",
     "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><eq/><ci>x</ci><apply><plus/><ci>a</ci><cn>1</cn></apply></apply></math>"
+  },
+  "ArrayNode": {
+    "formula": "[1, 2, 3]",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><list><cn>1</cn><cn>2</cn><cn>3</cn></list></math>"
   }
 }

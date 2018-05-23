@@ -11,6 +11,7 @@ const ParenthesisNode = require('./node/ParenthesisNode.js');
 const FunctionAssignmentNode = require('./node/FunctionAssignmentNode.js');
 const AssignmentNode = require('./node/AssignmentNode.js');
 const ConditionalNode = require('./node/ConditionalNode.js');
+const ArrayNode = require('./node/ArrayNode.js');
 
 const jsEnv = require('browser-or-node');
 const MathMLDocument = require('./MathMLDocument');
@@ -26,6 +27,7 @@ if (jsEnv.isNode) {
   math.import(FunctionAssignmentNode);
   math.import(AssignmentNode);
   math.import(ConditionalNode);
+  math.import(ArrayNode);
 
   exports.name = 'toCMathML';
   exports.path = 'expression.node.Node.prototype';
@@ -54,6 +56,6 @@ let _cMathMl = function() {
 };
 
 function _validate(formula) {
-  let isWrong = /^[^*/+-\w()_,.><= ?:]/.test(formula);// /[^\^*\/+-\w()_,.\>\<\= \?\:]/
-  return !isWrong;
+  //let isWrong = /^[^*/+-\w()_,.><= ?:]/.test(formula);// /[^\^*\/+-\w()_,.\>\<\= \?\:]/
+  return true;
 }

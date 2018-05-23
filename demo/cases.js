@@ -8,5 +8,5 @@ const cases = [
   'x = a + 1',
   'a > 0 ? a : -a',
   't==1 or t==2 or t ==3',
-  't==1 or t==2 or t ==3'
+  '[1, 2, 3]'
 ];

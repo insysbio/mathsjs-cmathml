@@ -7,6 +7,7 @@ cases.forEach(function(item, i) {
   _createFormulaContainer(item, i);
 
   let formulaMathjsParse = math.parse(item);
+  console.log(formulaMathjsParse);
   let formulaCMathML = formulaMathjsParse.toCMathML();
 
   if (formulaMathjsParse && formulaCMathML) {
