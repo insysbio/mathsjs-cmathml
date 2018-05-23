@@ -6,7 +6,6 @@ const math = require('mathjs');
 const nodeCases = require('./cases/nodes.json');
 
 math.import(require('../src')); // add function to toCMathML
-
 describe('Nodes:', function(){
   for(let nodeCase in nodeCases) {
     it(nodeCase, () => {

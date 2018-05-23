@@ -9,9 +9,10 @@
 // import external
 const math = require('mathjs');
 
-math.import(require('../../src/to_content_mathml')); // add function to toCMathML
+math.import(require('../../src')); // add function to toCMathML
 
 let m = math.parse('a');
+
 let xmlString = m
   .toCMathML()
   .toString();

@@ -1,6 +1,9 @@
 /*global window:true*/
 'use strict';
 
+const jsEnv = require('browser-or-node');
+const MathMLDocument = require('./MathMLDocument');
+
 
 const Node = require('./node/Node.js');
 const SymbolNode = require('./node/SymbolNode.js');
@@ -13,25 +16,23 @@ const AssignmentNode = require('./node/AssignmentNode.js');
 const ConditionalNode = require('./node/ConditionalNode.js');
 const ArrayNode = require('./node/ArrayNode.js');
 
-const jsEnv = require('browser-or-node');
-const MathMLDocument = require('./MathMLDocument');
-const math = require('mathjs');
-
 if (jsEnv.isNode) {
-  math.import(Node);
-  math.import(SymbolNode);
-  math.import(ConstantNode);
-  math.import(FunctionNode);
-  math.import(OperatorNode);
-  math.import(ParenthesisNode);
-  math.import(FunctionAssignmentNode);
-  math.import(AssignmentNode);
-  math.import(ConditionalNode);
-  math.import(ArrayNode);
-
   exports.name = 'toCMathML';
   exports.path = 'expression.node.Node.prototype';
-  exports.factory = function() {
+  exports.math = true;
+  exports.factory = function (type, config, load, typed, math) {
+    math.import([
+      Node,
+      ConstantNode,
+      SymbolNode,
+      FunctionNode,
+      OperatorNode,
+      ParenthesisNode,
+      FunctionAssignmentNode,
+      AssignmentNode,
+      ConditionalNode,
+      ArrayNode
+    ]);
     return function() {
       return _cMathMl.apply(this);
     };
