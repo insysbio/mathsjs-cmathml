@@ -44,17 +44,8 @@ if (jsEnv.isBrowser) {
 }
 
 let _cMathMl = function() {
-  if (!(_validate(this.toString()))) {
-    return false;
-  }
-
   let doc = new MathMLDocument();
   this.toCMathMLNode(doc.documentElement);
 
   return doc;
 };
-
-function _validate(formula) {
-  //let isWrong = /^[^*/+-\w()_,.><= ?:]/.test(formula);// /[^\^*\/+-\w()_,.\>\<\= \?\:]/
-  return true;
-}
