@@ -1,6 +1,5 @@
-/*global window:true*/
+/*global window,MathMLDocument:true*/
 'use strict';
-const MathMLDocument = require('./MathMLDocument');
 const {jsEnv} = require('./isEnv');
 
 const Node = require('./node/Node.js');

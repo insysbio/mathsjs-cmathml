@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  entry: './src',
+  entry: './src/browserEntry',
   mode: 'production',
   output: {
     path: __dirname+'/demo',
