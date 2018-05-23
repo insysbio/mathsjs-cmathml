@@ -13,6 +13,7 @@ const FunctionAssignmentNode = require('./node/FunctionAssignmentNode.js');
 const AssignmentNode = require('./node/AssignmentNode.js');
 const ConditionalNode = require('./node/ConditionalNode.js');
 const ArrayNode = require('./node/ArrayNode.js');
+const BlockNode = require('./node/BlockNode.js');
 
 if (jsEnv.isNode) {
   exports.name = 'toCMathML';
@@ -29,7 +30,8 @@ if (jsEnv.isNode) {
       FunctionAssignmentNode,
       AssignmentNode,
       ConditionalNode,
-      ArrayNode
+      ArrayNode,
+      BlockNode
     ]);
     return function() {
       return _cMathMl.apply(this);

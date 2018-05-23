@@ -38,5 +38,9 @@
   "ArrayNode": {
     "formula": "[1, 2, 3]",
     "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><list><cn>1</cn><cn>2</cn><cn>3</cn></list></math>"
+  },
+  "BlockNode": {
+    "formula": "a=1; b=2; c=3",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><list><apply><eq/><ci>a</ci><cn>1</cn></apply><apply><eq/><ci>b</ci><cn>2</cn></apply><apply><eq/><ci>c</ci><cn>3</cn></apply></list></math>"
   }
 }
