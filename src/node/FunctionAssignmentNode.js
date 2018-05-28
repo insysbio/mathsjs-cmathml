@@ -20,11 +20,11 @@ if (jsEnv.isNode) {
 }
 
 function _toCMathMLNode(parentXML) {
-  var lambda = parentXML.ownerDocument.createElement('lambda');
+  var lambda = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'lambda');
 
   this.params.forEach(function(item) {
-    var bvar = parentXML.ownerDocument.createElement('bvar');
-    var param = parentXML.ownerDocument.createElement('ci');
+    var bvar = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'bvar');
+    var param = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'ci');
     param.appendChild(parentXML.ownerDocument.createTextNode(item));
     bvar.appendChild(param);
     lambda.appendChild(bvar);

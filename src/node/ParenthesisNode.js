@@ -20,7 +20,7 @@ if (jsEnv.isNode) {
 }
 
 function _toCMathMLNode(parentXML) {
-  let apply = parentXML.ownerDocument.createElement('apply');
+  let apply = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'apply');
   this.content.toCMathMLNode(apply);
   parentXML.appendChild(apply);
 }

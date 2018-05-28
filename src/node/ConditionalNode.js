@@ -23,9 +23,9 @@ if (jsEnv.isNode) {
 
 
 function _toCMathMLNode(parentXML) {
-  var piecewise = parentXML.ownerDocument.createElement('piecewise');
-  var piece = parentXML.ownerDocument.createElement('piece');
-  var otherwise = parentXML.ownerDocument.createElement('otherwise');
+  var piecewise = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'piecewise');
+  var piece = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'piece');
+  var otherwise = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'otherwise');
 
   if(this.trueExpr) this.trueExpr.toCMathMLNode(piece);
   if(this.falseExpr) this.falseExpr.toCMathMLNode(otherwise);
