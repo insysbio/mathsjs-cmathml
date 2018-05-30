@@ -1,26 +1,16 @@
-/*global window:true*/
 'use strict';
 
-const {jsEnv} = require('../isEnv');
-
-if (jsEnv.isBrowser) {
-  window['math'].expression.node.SymbolNode.prototype.toCMathMLNode = function() {
-    return _toCMathMLNode.apply(this, arguments);
-  };
-}
-
-if (jsEnv.isNode) {
-  exports.name = 'toCMathMLNode';
-  exports.path = 'expression.node.SymbolNode.prototype';
-  exports.factory = function() {
+module.exports = {
+  name: 'toCMathMLNode',
+  path: 'expression.node.SymbolNode.prototype',
+  factory: function() {
     return function() {
-      return _toCMathMLNode.apply(this, arguments);
+      let parentXML = arguments[0];
+      let XMLNode = parentXML
+        .ownerDocument
+        .createElementNS('http://www.w3.org/1998/Math/MathML', 'ci');
+      XMLNode.appendChild(parentXML.ownerDocument.createTextNode(this.name));
+      parentXML.appendChild(XMLNode);
     };
-  };
-}
-
-function _toCMathMLNode(parentXML) {
-  let XMLNode = parentXML.ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'ci');
-  XMLNode.appendChild(parentXML.ownerDocument.createTextNode(this.name));
-  parentXML.appendChild(XMLNode);
-}
+  }
+};

@@ -1,52 +1,19 @@
-/*global window,MathMLDocument:true*/
 'use strict';
-const {jsEnv} = require('./isEnv');
 
-const Node = require('./node/Node.js');
-const SymbolNode = require('./node/SymbolNode.js');
-const ConstantNode = require('./node/ConstantNode.js');
-const FunctionNode = require('./node/FunctionNode.js');
-const OperatorNode = require('./node/OperatorNode.js');
-const ParenthesisNode = require('./node/ParenthesisNode.js');
-const FunctionAssignmentNode = require('./node/FunctionAssignmentNode.js');
-const AssignmentNode = require('./node/AssignmentNode.js');
-const ConditionalNode = require('./node/ConditionalNode.js');
-const ArrayNode = require('./node/ArrayNode.js');
-const BlockNode = require('./node/BlockNode.js');
-
-if (jsEnv.isNode) {
-  exports.name = 'toCMathML';
-  exports.path = 'expression.node.Node.prototype';
-  exports.math = true;
-  exports.factory = function (type, config, load, typed, math) {
-    math.import([
-      Node,
-      ConstantNode,
-      SymbolNode,
-      FunctionNode,
-      OperatorNode,
-      ParenthesisNode,
-      FunctionAssignmentNode,
-      AssignmentNode,
-      ConditionalNode,
-      ArrayNode,
-      BlockNode
-    ]);
-    return function() {
-      return _cMathMl.apply(this);
-    };
+module.exports = function(DOMParser){
+  return {
+    name: 'toCMathML',
+    path: 'expression.node.Node.prototype',
+    factory: function (type, config, load, typed) {
+      return function toCMathML() {
+        let doc = new DOMParser()
+          .parseFromString(
+            '<math xmlns=\'http://www.w3.org/1998/Math/MathML\'/>',
+            'text/xml'
+          );
+        this.toCMathMLNode(doc.documentElement);
+        return doc;
+      };
+    }
   };
-}
-
-if (jsEnv.isBrowser) {
-  window['math'].expression.node.Node.prototype.toCMathML = function() {
-    return _cMathMl.apply(this);
-  };
-}
-
-let _cMathMl = function() {
-  let doc = new MathMLDocument();
-  this.toCMathMLNode(doc.documentElement);
-
-  return doc;
 };

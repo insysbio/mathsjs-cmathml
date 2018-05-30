@@ -1,5 +1,5 @@
 'use strict';
-const {DOMParser} = require('xmldom');
+const {DOMParser} = window;
 
 const mods = [
   require('./toCMathML')(DOMParser),
@@ -16,9 +16,5 @@ const mods = [
   require('./node/BlockNode.js')
 ];
 
-if(typeof window === 'undefined') {
-  module.exports = mods;
-}else{
-  window.cmathml = mods; // load as global
-  // math.import[mods]; // load in math
-}
+window.cmathml = mods; // load as global
+// math.import[mods]; // load in math
