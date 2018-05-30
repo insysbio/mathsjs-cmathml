@@ -1,24 +1,11 @@
-/*global window:true*/
 'use strict';
 
-const {jsEnv} = require('../isEnv');
-
-if (jsEnv.isBrowser) {
-  window['math'].expression.node.Node.prototype.toCMathMLNode = function() {
-    return _toCMathMLNode.apply(this);
-  };
-}
-
-if (jsEnv.isNode) {
-  exports.name = 'toCMathMLNode';
-  exports.path = 'expression.node.Node.prototype';
-  exports.factory = function() {
+module.exports = {
+  name: 'toCMathMLNode',
+  path: 'expression.node.Node.prototype',
+  factory: function() {
     return function() {
-      return _toCMathMLNode.apply(this, arguments);
+      throw new Error(`unknown node: ${this.type}`);
     };
-  };
-}
-
-function _toCMathMLNode() {
-  throw new Error(`unknown node: ${this.type}`);
-}
+  }
+};
