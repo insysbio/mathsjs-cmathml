@@ -6,11 +6,10 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack-dev.config.js --content-base ./demo",
-    "test:index": "node ./test/draft/manual_test.js",
+    "test:manual": "node ./test/manual/manual_test.js",
     "test": "mocha",
     "build": "npm run clean && webpack --config webpack-build.config.js",
     "clean": "rimraf ./dist",
-    "production": "webpack --config webpack-build.config.js",
     "lint": "eslint --ext .js -o lint.report.html -f html src"
   },
   "contributors": [
@@ -23,8 +22,6 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "browser-or-node": "^1.0.2",
-    "mathjs": "^4.0.1",
     "xmldom": "^0.1.27"
   },
   "devDependencies": {
@@ -39,6 +36,7 @@
     "express": "^4.16.2",
     "file-loader": "^1.1.11",
     "jquery": "^3.3.1",
+    "mathjs": "^4.4.1",
     "mocha": "^5.1.1",
     "nodemon": "^1.17.2",
     "pretty-json-stringify": "0.0.2",

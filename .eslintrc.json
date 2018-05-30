@@ -1,13 +1,6 @@
 {
     "globals": {
-        "mongoose": false,
-        "winston": false,
-        "path": false,
-        "fs": false,
-        "fse": false,
-        "async": false,
-        "_": false,
-        "pjs": false
+        "window": false
     },
     "env": {
         "es6": true,
@@ -40,7 +33,7 @@
 		  {"requireReturn": false}
 		],
         "dot-location": [
-          "error", 
+          "error",
           "property"
         ],
         "eqeqeq": "error",
@@ -55,16 +48,15 @@
         "no-warning-comments": "warn",
         "yoda": "error",
         "strict": [
-          "error", 
+          "error",
           "global"
         ],
-        "global-require": "error",
         "max-len": [
-          "warn", 
+          "warn",
           {"code": 100, "ignoreComments": true}
         ],
         "max-nested-callbacks": [
-          "error", 
+          "error",
           3
         ],
         "no-unused-vars": "warn"
