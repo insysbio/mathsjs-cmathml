@@ -16,8 +16,8 @@
     "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><plus/><ci>x</ci><cn>1</cn></apply></math>"
   },
   "ParenthesisNode": {
-    "formula": "(1)",
-    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><cn>1</cn></apply></math>"
+    "formula": "x*(y*z)",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><times/><ci>x</ci><apply><times/><ci>y</ci><ci>z</ci></apply></apply></math>"
   },
   "FunctionAssignmentNode": {
     "formula": "f(x) = x",
