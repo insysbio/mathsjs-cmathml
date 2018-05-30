@@ -1,0 +1,32 @@
+hr{
+	height:2px;
+	color: black;
+	background-color: black;
+}
+b{
+	color: teal;
+}
+.node{
+	color: teal;
+	font-weight: bold;
+}
+.mathjs, textarea{
+	width: 80%;
+  padding: 10px;
+	overflow: auto;
+}
+.mathjs{
+	border: 1px solid grey;
+}
+textarea{
+height:200px;
+}
+
+#content p {
+  background: #ccc;
+  padding: 10px;
+}
+#navigate {
+	height: 350px;
+	overflow-y: auto; 
+}

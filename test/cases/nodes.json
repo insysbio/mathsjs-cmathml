@@ -1,0 +1,50 @@
+{
+  "SymbolNode": {
+    "formula": "a",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><ci>a</ci></math>"
+  },
+  "ConstantNode": {
+    "formula": "1",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><cn>1</cn></math>"
+  },
+  "FunctionNode": {
+    "formula": "f(x)",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><f/><ci>x</ci></apply></math>"
+  },
+  "OperatorNode": {
+    "formula": "x+1",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><plus/><ci>x</ci><cn>1</cn></apply></math>"
+  },
+  "ParenthesisNode": {
+    "formula": "(1)",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><cn>1</cn></apply></math>"
+  },
+  "FunctionAssignmentNode": {
+    "formula": "f(x) = x",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><lambda><bvar><ci>x</ci></bvar><ci>x</ci></lambda></math>"
+  },
+  "ConditionalNode": {
+    "formula": "a > 0 ? a : -a",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><piecewise><piece><ci>a</ci><apply><gt/><ci>a</ci><cn>0</cn></apply></piece><otherwise><apply><minus/><ci>a</ci></apply></otherwise></piecewise></math>"
+  },
+  "AssignmentNode(simple)": {
+    "formula": "x = 5",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><eq/><ci>x</ci><cn>5</cn></apply></math>"
+  },
+  "AssignmentNode": {
+    "formula": "x = a + 1",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><eq/><ci>x</ci><apply><plus/><ci>a</ci><cn>1</cn></apply></apply></math>"
+  },
+  "ArrayNode": {
+    "formula": "[1, 2, 3]",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><list><cn>1</cn><cn>2</cn><cn>3</cn></list></math>"
+  },
+  "BlockNode": {
+    "formula": "a=1; b=2; c=3",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><list><apply><eq/><ci>a</ci><cn>1</cn></apply><apply><eq/><ci>b</ci><cn>2</cn></apply><apply><eq/><ci>c</ci><cn>3</cn></apply></list></math>"
+  },
+  "Complex expression": {
+    "formula": "x*y/z+a*exp(t)*log(15)",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><plus/><apply><divide/><apply><times/><ci>x</ci><ci>y</ci></apply><ci>z</ci></apply><apply><times/><apply><times/><ci>a</ci><apply><exp/><ci>t</ci></apply></apply><apply><ln/><cn>15</cn></apply></apply></apply></math>"
+  }
+}
