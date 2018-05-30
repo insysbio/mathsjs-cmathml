@@ -16,5 +16,9 @@ const mods = [
   require('./node/BlockNode.js')
 ];
 
-window.cmathml = mods; // load as global
-// math.import[mods]; // load in math
+if(typeof window === 'undefined') {
+  module.exports = mods;
+}else{
+  window.cmathml = mods; // load as global
+  // math.import[mods]; // load in math
+}

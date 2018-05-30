@@ -1,7 +1,6 @@
-/*global window:true*/
 'use strict';
 
-const dictFunc = require('../dictionaryFunction');
+const dictFunc = require('../dictionary');
 
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.FunctionNode.prototype';
@@ -12,7 +11,7 @@ exports.factory = function() {
       .ownerDocument
       .createElementNS('http://www.w3.org/1998/Math/MathML', 'apply');
     apply.appendChild(parentXML.ownerDocument.createElementNS(
-      'http://www.w3.org/1998/Math/MathML', 
+      'http://www.w3.org/1998/Math/MathML',
       dictFunc[this.fn.name] || this.fn.name)
     );
     if (this.args) {

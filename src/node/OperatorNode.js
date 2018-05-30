@@ -1,7 +1,6 @@
-/*global window:true*/
 'use strict';
 
-const dictFunc = require('../dictionaryFunction');
+const dictFunc = require('../dictionary');
 
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.OperatorNode.prototype';

@@ -1,4 +1,3 @@
-/*global window:true*/
 'use strict';
 
 exports.name = 'toCMathMLNode';
