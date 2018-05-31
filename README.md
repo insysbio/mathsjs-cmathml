@@ -19,7 +19,7 @@ npm install mathjs-cmathml
 NodeJS version uses external DOM from library `xmldom`.
 ```javascript
 const math = require('mathjs');
-math.import(require(mathsjs-cmathml));
+math.import(require('mathsjs-cmathml'));
 
 let doc = math
     .parse('x*sin(y/z)')
@@ -51,7 +51,7 @@ console.log(mathml);
 The another entry point is used for webpack building. Webpack version uses browser DOM.
 ```javascript
 const math = require('mathjs');
-math.import(require(mathsjs-cmathml/webpack));
+math.import(require('mathsjs-cmathml/webpack'));
 
 let doc = math
     .parse('x*sin(y/z)')
