@@ -3,11 +3,11 @@ const webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  entry: './src/webpack',
+  entry: './src/browser',
   mode: 'production',
   output: {
     path: __dirname+'/dist',
-    filename: 'mathjs.toCMathML.min.js'
+    filename: 'mathjs-cmathml.min.js'
   },
   module: {
     rules: [

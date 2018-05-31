@@ -46,6 +46,18 @@ let doc = math
 let mathml = new XMLSerializer().serializeToString(doc); // stringify MathML
 console.log(mathml);
 ```
+## webpack
+
+The another entry point is used for webpack building. Webpack version uses browser DOM.
+```javascript
+const math = require('mathjs');
+math.import(require(mathsjs-cmathml/webpack));
+
+let doc = math
+    .parse('x*sin(y/z)')
+    .toCMathML();
+let mathml = new XMLSerializer().serializeToString(doc); // stringify MathML
+console.log(mathml);
 
 ## Maintainers
 

@@ -5,7 +5,7 @@ const math = require('mathjs');
 
 math.import(require('../../src')); // add function to toCMathML
 
-let source = 'x';
+let source = 'x*(y*z)';
 console.log(source);
 
 let m = math.parse(source);

@@ -1,7 +1,7 @@
 'use strict';
 const {DOMParser} = require('xmldom');
 
-const mods = [
+module.exports = [
   require('./toCMathML')(DOMParser),
   require('./node/Node.js'),
   require('./node/SymbolNode.js'),
@@ -15,10 +15,3 @@ const mods = [
   require('./node/ArrayNode.js'),
   require('./node/BlockNode.js')
 ];
-
-if(typeof window === 'undefined') {
-  module.exports = mods;
-}else{
-  window.cmathml = mods; // load as global
-  // math.import[mods]; // load in math
-}
