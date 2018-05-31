@@ -58,7 +58,7 @@ let doc = math
     .toCMathML();
 let mathml = new XMLSerializer().serializeToString(doc); // stringify MathML
 console.log(mathml);
-
+```
 ## Maintainers
 
  - Viktoria Tkachenko @vetedde
