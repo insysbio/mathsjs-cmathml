@@ -4,8 +4,7 @@ module.exports = {
   name: 'toCMathMLNode',
   path: 'expression.node.ConstantNode.prototype',
   factory: function() {
-    return function() {
-      let parentXML = arguments[0];
+    return function(parentXML) {
       let XMLNode = parentXML
         .ownerDocument.createElementNS('http://www.w3.org/1998/Math/MathML', 'cn');
       if (String(this.value).match(/^[\d]+[.]?[\d]*[e][+-][\d]+$/)) {

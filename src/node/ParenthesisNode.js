@@ -3,8 +3,7 @@
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.ParenthesisNode.prototype';
 exports.factory = function() {
-  return function() {
-    let parentXML = arguments[0];
+  return function(parentXML) {
     this.content.toCMathMLNode(parentXML);
   };
 };

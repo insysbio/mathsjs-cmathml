@@ -5,8 +5,7 @@ const dictFunc = require('../dictionary');
 exports.name = 'toCMathMLNode';
 exports.path = 'expression.node.OperatorNode.prototype';
 exports.factory = function() {
-  return function() {
-    let parentXML = arguments[0];
+  return function(parentXML) {
     let apply = parentXML
       .ownerDocument
       .createElementNS('http://www.w3.org/1998/Math/MathML', 'apply');

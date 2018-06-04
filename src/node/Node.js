@@ -5,7 +5,7 @@ module.exports = {
   path: 'expression.node.Node.prototype',
   factory: function() {
     return function() {
-      throw new Error(`unknown node: ${this.type}`);
+      throw new Error(`toCMathML is not implemented for "${this.type}"`);
     };
   }
 };
