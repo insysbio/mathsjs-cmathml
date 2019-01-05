@@ -19,7 +19,7 @@ npm install mathjs-cmathml
 NodeJS version uses external DOM from library `xmldom`.
 ```javascript
 const math = require('mathjs');
-math.import(require('mathsjs-cmathml'));
+math.import(require('mathjs-cmathml'));
 
 let doc = math
     .parse('x*sin(y/z)')
@@ -31,7 +31,7 @@ console.log(mathml);
 
 Browser version can be downloaded from https://github.com/insysbio/mathsjs-cmathml/tree/master/dist
 
-NodeJS version uses browser DOM.
+Browser version uses internal default DOM.
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/4.2.2/math.min.js"></script>
 <script src="./mathjs.toCMathML.min.js"></script>
