@@ -1,7 +1,7 @@
 {
   "name": "mathjs-cmathml",
   "version": "0.1.4",
-  "description": "Extends MathJS for export to content MathML",
+  "description": "Extends MathJS for exporting expressions to content MathML",
   "sideEffects": false,
   "main": "src/index.js",
   "scripts": {

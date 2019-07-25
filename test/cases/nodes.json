@@ -7,6 +7,10 @@
     "formula": "1",
     "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><cn>1</cn></math>"
   },
+  "ConstantNode": {
+    "formula": "1.2e-9",
+    "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><cn type=\"e-notation\">1.2<sep/>-9</cn></math>"
+  },
   "FunctionNode": {
     "formula": "f(x)",
     "expected": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><f/><ci>x</ci></apply></math>"
