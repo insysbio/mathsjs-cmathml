@@ -1,5 +1,8 @@
 # mathsjs-cmathml
 
+*Currently it is not maintained.
+See also the project https://github.com/insysbio/mathjs-mathml which provides the similar functionality but does not use DOM.*
+
 ## Description
 
 Extends mathjs http://mathjs.org/ library by function translating the internal object to content MathML https://www.w3.org/Math/
